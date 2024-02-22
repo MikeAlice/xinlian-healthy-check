@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zeroone.star.sysmanager.mapper.UserDataMapper">
+
+
+    <!-- UserDataMapper.xml -->
+
+<!--    <insert id="createUser">-->
+<!--        INSERT INTO t_user-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="username != null">username,</if>-->
+<!--            <if test="password != null">password,</if>-->
+<!--            <if test="passStrength != null">pass_strength,</if>-->
+<!--            <if test="type != null">type,</if>-->
+<!--            <if test="status != null">status,</if>-->
+<!--            <if test="createBy != null">create_by,</if>-->
+<!--            <if test="createTime != null">create_time,</if>-->
+<!--            <if test="updateBy != null">update_by,</if>-->
+<!--            <if test="updateTime != null">update_time,</if>-->
+<!--            <if test="nickname != null">nickname,</if>-->
+<!--            <if test="avatar != null">avatar,</if>-->
+<!--            <if test="sex != null">sex,</if>-->
+<!--            <if test="description != null">description,</if>-->
+<!--            <if test="email != null">email,</if>-->
+<!--            <if test="mobile != null">mobile,</if>-->
+<!--            <if test="address != null">address,</if>-->
+<!--            <if test="street != null">street,</if>-->
+<!--            <if test="birth != null">birth,</if>-->
+<!--            <if test="autograph != null">autograph,</if>-->
+<!--            <if test="departmentId != null">department_id,</if>-->
+<!--            <if test="departmentTitle != null">department_title,</if>-->
+<!--            <if test="delFlag != null">del_flag,</if>-->
+<!--        </trim>-->
+<!--        VALUES-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="username != null">#{username},</if>-->
+<!--            <if test="password != null">#{password},</if>-->
+<!--            <if test="passStrength != null">#{passStrength},</if>-->
+<!--            <if test="type != null">#{type},</if>-->
+<!--            <if test="status != null">#{status},</if>-->
+<!--            <if test="createBy != null">#{createBy},</if>-->
+<!--            <if test="createTime != null">#{createTime},</if>-->
+<!--            <if test="updateBy != null">#{updateBy},</if>-->
+<!--            <if test="updateTime != null">#{updateTime},</if>-->
+<!--            <if test="nickname != null">#{nickname},</if>-->
+<!--            <if test="avatar != null">#{avatar},</if>-->
+<!--            <if test="sex != null">#{sex},</if>-->
+<!--            <if test="description != null">#{description},</if>-->
+<!--            <if test="email != null">#{email},</if>-->
+<!--            <if test="mobile != null">#{mobile},</if>-->
+<!--            <if test="address != null">#{address},</if>-->
+<!--            <if test="street != null">#{street},</if>-->
+<!--            <if test="birth != null">#{birth},</if>-->
+<!--            <if test="autograph != null">#{autograph},</if>-->
+<!--            <if test="departmentId != null">#{departmentId},</if>-->
+<!--            <if test="departmentTitle != null">#{departmentTitle},</if>-->
+<!--            <if test="delFlag != null">#{delFlag},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+    <insert id="createUser">
+        INSERT INTO t_user
+        (
+        username, password, nickname, mobile, department_title,
+        <trim suffixOverrides=",">
+        <if test="passStrength != null">pass_strength,</if>
+        <if test="type != null">type,</if>
+        <if test="status != null">status,</if>
+        <if test="createBy != null">create_by,</if>
+        <if test="createTime != null">create_time,</if>
+        <if test="updateBy != null">update_by,</if>
+        <if test="updateTime != null">update_time,</if>
+        <if test="avatar != null">avatar,</if>
+        <if test="sex != null">sex,</if>
+        <if test="description != null">description,</if>
+        <if test="email != null">email,</if>
+        <if test="address != null">address,</if>
+        <if test="street != null">street,</if>
+        <if test="birth != null">birth,</if>
+        <if test="autograph != null">autograph,</if>
+        <if test="departmentId != null">department_id,</if>
+        <if test="delFlag != null">del_flag,</if>
+        </trim>
+        )
+        VALUES
+        (
+        #{username}, #{password}, #{nickname}, #{mobile}, #{departmentTitle},
+        <trim suffixOverrides=",">
+        <if test="passStrength != null">#{passStrength},</if>
+        <if test="type != null">#{type},</if>
+        <if test="status != null">#{status},</if>
+        <if test="createBy != null">#{createBy},</if>
+        <if test="createTime != null">#{createTime},</if>
+        <if test="updateBy != null">#{updateBy},</if>
+        <if test="updateTime != null">#{updateTime},</if>
+        <if test="avatar != null">#{avatar},</if>
+        <if test="sex != null">#{sex},</if>
+        <if test="description != null">#{description},</if>
+        <if test="email != null">#{email},</if>
+        <if test="address != null">#{address},</if>
+        <if test="street != null">#{street},</if>
+        <if test="birth != null">#{birth},</if>
+        <if test="autograph != null">#{autograph},</if>
+        <if test="departmentId != null">#{departmentId},</if>
+        <if test="delFlag != null">#{delFlag},</if>
+        </trim>
+        )
+    </insert>
+    <delete id="deleteUserList">
+        DELETE FROM t_user WHERE id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>

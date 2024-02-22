@@ -1,0 +1,124 @@
+Exalanding:
+ feild: 
+  physical: 体检类型
+  personName: 人员姓名
+  Unit_name: 单位名称
+  name: 分组名称
+
+exalanding:
+ put:
+  modifyInformation: 修改人员信息
+ updateInformation:
+  personName: 人员姓名
+  sex: 性别
+  age: 年龄
+  isMarry: 结婚状况
+  idCard: 证件号码
+  birth: 出生日期
+  groupId: 分组
+  workName: 单位名称
+  mobile: 手机号码
+  feild: 
+  physical: 体检类型
+ file:
+  upload: 
+   summary: 上传文件   
+  editor-upload-image:
+   summary: 上传图片
+  field:
+   img-url: 图片src
+   img-alt: 图片描述
+   img-href: 图片链接
+ feild:
+  sex: 性别
+  groupUnitName: 单位名称
+  groupName: 分组名称
+  Unit_name: 单位名称
+  name: 分组名称
+
+questatistics:
+ remove:
+  summary: 删除人员
+saveinfo:
+  field:
+   id_card: 身份证号
+
+GetPD:
+ get:
+  summary: 获取体检人员详情
+ post:
+  summary: 新增一条示例数据
+ put:
+  summary: 修改一条示例数据
+ delete:
+  summary: 删除一条示例数据
+ query-one:
+  summary: 使用声明式服务查询一条数据
+ query-all:
+  summary: 使用声明式服务查询多条数据
+ field:
+  id: 编号
+  age: 年龄
+  name: 姓名
+  sex: 性别，如：男
+  id_card: 身份证号
+  work_name: 单位名称
+  phone: 联系电话
+
+file:
+ upload: 
+  summary: 单文件上传
+ upload-more:
+  summary: 多文件上传
+ download:
+  summary: 下载文件
+ html:
+  summary: HTML静态页面访问
+ editor-upload-image:
+  summary: editor上传图片示例接口
+ field:
+  filename: 文件名
+  img-url: 图片src
+  img-alt: 图片文字描述
+  img-href: 图片链接地址
+excel:
+ sheet:
+  s1: 数据表1
+  s2: 数据表2
+ header:
+  h1: 表头1
+  h2: 表头2
+  h3: 表头3
+  h4: 表头4
+  h5: 表头5
+mail:
+ topic: 测试主题
+ body1: <html><meta charset=\"UTF-8\"><body><p>我是<b>中文</b></p><p><font color=red>我是红色的中文</font></p></body></html>
+ body2: 我是中文，文字消息内容。
+pdf:
+ title: 测试标题
+ content: 测试内容
+ foot: 测试底部
+
+use:
+ field:
+  type: 体检类型
+  id: 身份证号
+  u_name: 体检姓名
+  sex: 性别
+  age: 年龄
+  linkPhone: 联系电话
+  name: 单位名称
+  marriage: 婚姻状态
+  g_name: 分组名称
+  idCard: 身份证号
+  save_if: 是否保存
+  is_pass: 状态
+
+check:
+ field:
+  item: 项目名称
+  id_card: 原价
+  discount: 折扣
+  discount_price: 折扣价
+  physical_type: 项目类型

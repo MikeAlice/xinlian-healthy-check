@@ -1,0 +1,7 @@
+cd controller && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+cd dao && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+cd domain/do && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+cd domain/dto && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+cd domain/query && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+cd domain/vo && md get-order-list;get-order-detail;get-order-item;get-order-person;add-order;update-order;delete-order;confirm-order;get-order-approval;download-person-template;import-person;export-person;download-entrust-template;upload-entrust;preview-entrust
+

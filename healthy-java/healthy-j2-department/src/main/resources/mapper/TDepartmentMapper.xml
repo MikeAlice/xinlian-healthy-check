@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.department.mapper.TDepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.zeroone.star.department.entity.TDepartment">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="DATE" property="createTime" />
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_time" jdbcType="DATE" property="updateTime" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <result column="sort_order" jdbcType="DECIMAL" property="sortOrder" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="is_parent" jdbcType="BIT" property="isParent" />
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT id,title,path,sort_order,create_time
+        FROM t_department
+        WHERE is_parent = 0 AND parent_id=#{parentId}
+        ORDER BY id,sort_order
+    </select>
+</mapper>

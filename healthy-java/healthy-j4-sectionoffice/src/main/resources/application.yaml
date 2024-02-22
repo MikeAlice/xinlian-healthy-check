@@ -1,0 +1,6 @@
+server:
+  port: ${sp.sectionoffice}
+spring:
+  application:
+    name: ${sn.sectionoffice}
+

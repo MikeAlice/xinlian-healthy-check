@@ -1,0 +1,287 @@
+save:
+ post:
+  addDepartRes: 新增诊台结果
+  addRPProCheck: 到检确认
+ put:
+  waiveCheck: 弃检项目
+ filed:
+  id: 唯一编号
+  personId: 体检人id
+  groupItemId: 分组项目id
+  groupItemName: 分组项目名称
+  diagnoseTip: 诊断提醒
+  diagnoseSum: 诊断小结
+  officeId: 科室id
+  officeName: 科室名称
+  checkDoc: 检查医生
+  checkDate: 检查日期
+  isCheck: 是否检查(0否1是）
+  delFlag: 删除标志（0-未删除）
+  orderGroupItemProjectId: 关联的基础项目id
+  orderGroupItemProjectName: 关联的基础项目名称
+  result: 体检结果
+  unitCode: 计量单位代码
+  unitName: 计量单位名称
+  ignoreStatus: 是否忽略异常（1-否，2-是）
+  crisisDegree: 危急程度
+  positive: 阳性
+  item: 明细dto
+  isUpdate: 是否是更新(0不是更新， 1是更新）
+  updateId: 更新部分的depart_res_id
+  itemId: 明细唯一id（仅在更改时有效）
+
+group_person:
+ get:
+  summary: 查询体检人员列表
+  info: 查询人员详情
+ field:
+  succ: 查询成功
+  fail: 查询失败
+ data:
+  name: 姓名
+  test_num: 体检编号
+  dept: 体检人员工作部门
+  physical_type: 体检类型
+  is_check: 是否检查
+  is_recheck: 是否复查
+  start_regist_date: 开始登记时间
+  finish_regist_date: 结束登记时间
+  is_pass: 是否通过检查
+  id_card: 身份证号
+  sex: 性别
+  age: 年龄
+  sporadic_physical: 订单类型
+  create_time: 登记时间
+ example:
+  name: 张三
+  test_num: 0001
+  dept: 宣传部
+  physical_type: 健康体检
+  start_regist_date: 2023-12-12
+  finish_regist_date: 2024-01-01
+
+result-entry:
+ cl-aban-proj:
+  put:
+   summary: 取消弃检
+  field:
+   personid: 人员id
+   order-group-item-id: 分组项目id
+   office-id: 科室id
+
+unknownmodulebasicinformation:
+ controller:
+  title: 基本信息查询
+  description: 人员id
+ query:
+  person_id: 人员id
+ dto:
+  person_id: 唯一编号
+  job: 特殊工种名称
+  work_year: 工龄年数
+  work_month: 工龄月数
+  exposure_start_date: 接害开始时间
+  education: 文化程度
+  family_address: 家庭住址
+  marriage_date: 婚姻状况
+
+unknownmodulelifehistory:
+ controller:
+  title: 生活史查询
+  description: 人员id
+ query:
+  person_id: 人员id
+ dto:
+  person_id: 唯一编号
+  existing_children: 现有子女（生育史）
+  allergies: 过敏史
+  smoke_state: 吸烟状态
+  package_every_day: 包每天
+  smoke_year: 吸烟年
+  drink_state: 喝酒状态
+  ml_every_day: ml每天
+  drink_year: 喝酒年
+  birthplace_name: 出生地
+  family_history: 家族史
+
+unknownmodulepastmedicalhistory:
+ controller:
+  title: 既往病史查询
+  description: 人员id
+ query:
+  person_id: 人员id
+ dto:
+  person_id: 唯一编号
+  abortion: 流产
+  premature: 早产
+  death: 死亡
+  abnormal_fetus: 异常胎
+  menstrual_history: 月经史
+  menstrual_info: 月经异常信息
+  allergies: 过敏史
+  allergies_info: 过敏异常信息
+  past_medical_history: 既往病史
+  past_medical_history_other_info: 既往病史其他信息
+  
+unknownmoduleprofessionalhistory:
+ controller:
+  tiile: 职业史查询
+  description: 人员id
+ query:
+  person_id: 人员id
+ dto:
+  person_id: 唯一编号
+  start_date: 起始时间
+  end_date: 结束时间
+  work_unit: 工作单位
+  department: 车间（部门）
+  work_type_text: 工种
+  hazard_factors_text: 危害因素
+  protective_measures: 防护措施
+  contact_time: 接触时间
+
+interro1:
+ field:
+  id: 体检人编号
+  project: 体检项目编码
+  project1: 体检项目
+  degree: 危及程度
+  time:	病程时间
+
+samplebarcodesview:
+ file:
+  personid: 体检人ID
+  groupitemid: 分组项目ID
+  type: 类型
+  barcode: 条形码内容
+  test_num: 体检编号
+  person_name: 体检人员名字
+  age: 体检人员年龄
+  sex: 体检人员性别
+  group_item_name: 分组项目名称
+ get:
+  barcode: 样本条码查看
+
+reportpreview:
+ file:
+  personid: 体检人ID
+  person_name: 人员姓名
+  sex: 性别
+  id_card: 证件号码
+  birth: 出生日期
+  age: 年龄
+  home_address: 家庭住址
+  mobile: 手机号码
+  test_num: 体检编号
+  department: 所属部门
+  dept: 单位名称
+  check_date: 体检日期
+  other_hazard_factors: 危害因素名称
+  work_type_text: 工种名称
+  work_year: 总工龄年数
+  exposure_work_year: 接害工龄年数
+  education: 文化程度
+  marriage_date: 婚姻史-结婚日期
+  period: 经期
+  cycle: 周期
+  menarche: 初潮
+  last_menstruation: 末次月经
+  existing_children: 现有子女
+  abortion: 流产
+  premature: 早产
+  death: 死亡
+  abnormal_fetus: 异常胎
+  allergies: 过敏史
+  package_every_day: 包每天
+  smoke_year: 吸烟年
+  ml_every_day: ml每天
+  drink_year: 喝酒年
+  birthplace_name: 出生地名称
+  family_history: 家族史
+  past_medical_history: 既往病史其他信息
+  disease_name: 病名
+  degree: 程度
+  course_time: 时间
+  project_name: 项目名称
+  code: 项目编码
+ get:
+  report: 报告预览
+
+interro:
+ get:
+  summary: 症状询问
+ post:
+  summary: 保存症状询问
+
+interro2:
+ field:
+  id: 体检人编号
+  type: 类别
+  project: 体检项目
+  code: 项目编号
+  degree: 危及程度
+  coursetime: 病程时间
+  personid: 体检人编号
+  createid: 创建人-体检医生
+  createname: 检查医生
+  time:	病程时间
+
+checkitem:
+ portfolio:
+  name: 组合项目名称
+  eg_name: 第二个项目
+  id: 组合项目编号
+  eg_id: 0002
+ base:
+  id: 项目编号
+  code: 项目代码
+  name: 体检项目
+  unit_name: 单位
+  healthy_value: 参考值
+  default_value: 明细结果默认值
+  result_type: 明细结果类型
+ person:
+  id: 人员编号
+  eg_id: 49d75bd94ca5b80735c5d2d98fb48fd3
+  name: 姓名
+  eg_name: 张三
+ filed:
+  project_summary: 查询组合项目的基础项目体检结果数据
+  person_summary: 查询人员的体检组合项目
+
+file_chengfeng:
+ upload: 
+  summary: 影像文件上传
+ field:
+  filename: 文件名
+  person_id: 体检人员id
+  file_addr: 需要上传的文件地址
+  success: 成功
+  fail: 失败
+  no_zip: 文件不是.zip类型
+  fail_dfs: 文件上传服务器失败
+
+ 
+person:
+ get:
+  summary: 查询体检人员列表
+ field:
+  succ: 查询成功
+  fail: 查询失败
+ data:
+  name: 姓名
+  test_num: 体检编号
+  dept: 体检人员工作部门
+  physical_type: 体检类型
+  is_check: 是否检查
+  is_recheck: 是否复查
+  start_regist_date: 开始登记时间
+  finish_regist_date: 结束登记时间
+ example:
+  name: 张三
+  test_num: 0001
+  dept: 宣传部
+  physical_type: 健康体检
+  start_regist_date: 2023-12-12
+  finish_regist_date: 2024-01-01
+     

@@ -1,0 +1,126 @@
+base:
+    referenceMod:
+        id: 主键
+        allowSex: 适合性别
+        minAge: 年龄最低值
+        maxAge: 年龄最高值
+        healthyValue: 健康参考值
+        occupationValue: 职业参考值
+        put:
+            summary: 修改基础数据中指定项目的指定参考值
+    referenceDel:
+        id: 主键
+        delete:
+            summary: 删除基础项目中指定项目的指定参考值
+criticalValue:
+    query:
+        summary: 获取指定项目危机值列表详情
+    post:
+        summary: 新增指定项目危机值
+    field:
+        id: 主键
+        baseProjectId: 项目id
+        level: 等级
+        type: 类型
+        intervalValue: 区间值
+        allowSex: 适合性别
+        minAge: 年龄最低值
+        maxAge: 年龄最高值
+        departmentId: 所属部门
+        createId: 创建人
+        createTime: 创建时间
+test:
+    get:
+        summary: 测试查询
+    field:
+        succ: 查询成功
+        fail: 查询失败
+excel:
+    sheet:
+        s1: 数据表1
+        s2: 数据表2
+    header:
+        h1: 表头1
+        h2: 表头2
+        h3: 表头3
+        h4: 表头4
+        h5: 表头5
+critical:
+    field:
+        level: 等级
+        type: 类型
+        intervalValue: 区间值
+        allowSex: 适合性别
+        minAge: 年龄最低值
+        maxAge: 年龄最高值
+        id: 表id
+    delete:
+        summary: 基础项目-配置指定项目-危机值-删除指定项目指定危机值
+    put:
+        summary: 基础项目-配置指定项目-危机值-修改指定项目指定危机值
+common:
+    reference_value:
+        controller:
+            query: 
+                summary: 获取指定项目指定参考值详情
+            add:
+                summary: 新增指定项目参考值
+        field:
+            id: 主键
+            base_project_id: 项目id
+            allow_sex: 适合性别
+            min_age: 年龄最低值
+            max_age: 年龄最高值
+            healthy_value: 健康参考值
+            occupation_value: 职业参考值
+            department_id: 所属部门
+            create_id: 创建人
+            create_time: 创建时间
+    baseproject:
+        add:
+            summary: 基础项目-新增项目
+        controller:
+            query:
+                summary: 基础项目-获取指定项目详情
+    baseprojectlist:
+        controller:
+            query:
+                summary: 基础数据-获取项目列表
+basis:
+    field:
+        title: 术语内容
+        type:   套餐类型
+        name:   套餐名称
+    query:
+        summary: 体检套餐-获取职业禁忌证术语列表
+        summary2: 体检套餐-获取套餐名称列表
+combo:
+    addPack: 基础项目-新增套餐
+    delPack: 基础项目-删除套餐
+    updatePack: 基础项目-修改套餐
+rules:
+    field:
+        short_name: 简称
+        type: 类型
+        interval_Value: 区间值
+        allow_Sex: 适合性别
+        min_Age: 年龄最低值
+        max_Age: 年龄最高值
+        id: id
+        name: 名称
+        base_project_id: 项目id
+        career_advice: 职业建议
+        create_id: 创建人
+        create_time: 创建时间
+        department_id: 所属部门
+        dietary_guidancce: 饮食指导
+        health_advice: 健康建议
+        health_knowledge: 健康知识
+        in_conclusion: 是否进入小结
+        positive: 是否阳性
+        reminder: 温馨提示
+        sports_guidance: 运动指导
+    modify-rules:
+        summary: 基础项目-配置指定项目-规则-修改指定规则列表
+    query-all:
+        summary: 基础项目-配置指定项目-规则-获取指定规则列表

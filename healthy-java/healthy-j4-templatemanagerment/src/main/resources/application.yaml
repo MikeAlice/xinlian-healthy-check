@@ -1,0 +1,5 @@
+server:
+  port: ${sp.template}
+spring:
+  application:
+    name: ${sn.template}

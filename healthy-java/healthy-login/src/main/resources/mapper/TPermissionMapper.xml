@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.login.mapper.TPermissionMapper">
+    <resultMap id="BaseResultMap" type="com.zeroone.star.login.entity.TPermission">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <id column="type" jdbcType="TINYINT" property="type" />
+        <id column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <id column="title" jdbcType="VARCHAR" property="title" />
+        <id column="name" jdbcType="VARCHAR" property="name" />
+        <id column="path" jdbcType="VARCHAR" property="path" />
+        <id column="icon" jdbcType="VARCHAR" property="icon" />
+        <id column="component" jdbcType="VARCHAR" property="component" />
+        <id column="url" jdbcType="VARCHAR" property="url" />
+        <id column="sort_order" jdbcType="DECIMAL" property="sortOrder" />
+        <id column="status" jdbcType="TINYINT" property="status" />
+        <id column="button_type" jdbcType="VARCHAR" property="buttonType" />
+        <id column="show_always" jdbcType="BIT" property="showAlways" />
+        <id column="is_menu" jdbcType="BIT" property="isMenu" />
+        <id column="show_left" jdbcType="BIT" property="showLeft" />
+        <id column="level" jdbcType="INTEGER" property="level" />
+        <id column="description" jdbcType="VARCHAR" property="description" />
+    </resultMap>
+    <select id="selectByRoleName" resultMap="BaseResultMap">
+        SELECT id, type, parent_id, title, `name`, `path`, icon, component,
+               url, sort_order, `status`, button_type, show_always, is_menu, show_left, `level`, `description`
+        FROM zo_healthy.t_permission
+        WHERE path IS NOT NULL
+          AND del_flag = 0
+          AND status = 0
+          AND id IN (
+            SELECT permission_id
+            FROM zo_healthy.t_role_permission
+            WHERE role_id=(SELECT id FROM zo_healthy.t_role WHERE name=#{roleName}))
+        ORDER BY level
+    </select>
+</mapper>

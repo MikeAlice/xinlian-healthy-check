@@ -1,0 +1,41 @@
+﻿healthcertidetail:
+ download-healthcertidetail:
+  summary: 获取健康证详情
+ field:
+  pdfname: pdf文件路径
+query-healthcertificatelist:
+ get:
+  summary: 获取健康证列表
+ field:
+  hcid: 健康证编号
+  startDate: 登记时间范围（开始）
+  endDate: 登记时间范围（结束）
+  name: 姓名
+  sex: 姓别
+  age: 年龄
+  printState: 打印状态
+  isUpload: 上传状态
+  unitOfIssue: 发证单位
+  termOfValidity: 有效日期
+printconfirm:
+ put:
+  summary: 打印确认（支持批量）
+ field:
+  order-id: 订单ID
+printmore:
+ download-printmore:
+  summary: 批量打印
+ field:
+  id: 健康证id
+  urls: 下载链接
+view-exception:
+ get:
+  summary: 查看异常
+ field:
+  hcid: 健康证编号
+  exception_message: 上传异常信息
+uploadmore:
+ post:
+  summary: 批量上传
+ field:
+  fileName: 健康证文件名

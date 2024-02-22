@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.percenter.mapper.TUserMapper">
+    <update id="updatePersonalInfo">
+        update zo_healthy.t_user
+        <set>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="street != null">street = #{street},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="autograph != null">autograph = #{autograph},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,96 @@
+﻿# 营销管理-团检单位
+unit:
+ get-name:
+  summary: 获取单位名称列表（用于输入表单下拉列表框）
+ get-list:
+  summary: 获取单位列表（条件+分页）
+ get-detail:
+  summary: 获取单位详情
+ post:
+  summary: 新增单位
+ put:
+  summary: 修改单位
+ delete:
+  summary: 删除单位（支持批量删除）
+ field:
+  # 基础信息
+  # t_group_unit
+  id: 单位ID
+  name: 单位名称
+  physical_type: 体检类型
+  uscc: 统一社会信用代码
+  industry_code: 行业类型编码
+  industry_name: 行业类型名称
+  region_code: 所属地区编码
+  region_name: 所属地区地址
+  economic_type_code: 经济类型编码
+  economic_type_name: 经济类型名称
+  address: 单位注册地址
+  business_scale_code: 企业规模编码
+  business_scale_name: 企业规模名称
+  employees_num: 职工人数
+  danger_num: 接触职业病危害因素人数
+  link_man2: 体检联系人
+  link_phone2: 体检联系人电话
+  attachment: 附件文件名称（营业执照）
+  # 其他信息
+  # t_group_unit
+  legal_person: 法人姓名
+  legal_phone: 法人电话
+  workman_num: 生产工人数
+  workmistress_num: 接触职业病危害因素女工人数
+  postal_code: 单位注册邮编
+  work_area: 经营面积
+  reg_capital: 注册资金
+  safety_principal: 职业卫生安全负责人
+  filing_date: 建档日期
+  establishment_date: 建厂日期
+  link_man1: 检测联系人
+  link_phone1: 检测联系电话
+  position1: 检测联系人职务
+  position2: 体检联系人职务
+  safe_position: 安全联系人职务
+  safe_phone: 安全联系人电话
+  subje_conn: 隶属关系
+  enrol_address: 作业场所地址
+  enrol_postal_code: 作业场所邮编
+  occ_mana_office: 职业卫生管理机构
+  # 附加信息
+  # PayloadDTO，authObject->getPayload()
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+  del_flag: 是否删除(0-未删除，1-已删除)
+  # 检测信息
+  # t_test_record
+  test: 检测信息
+
+# 检测信息
+# t_test_record
+test:
+ field:
+  id: 检测信息id
+  unit_id: 单位id
+  hazard_factors: 职业有害因素编码
+  hazard_factors_text: 职业有害因素名称
+  other_hazard_factors: 其他有害因素名称
+  work_state_code: 在岗状态编码
+  work_state_text: 在岗状态
+  work_type_code: 工种代码
+  work_type_text: 工种名称
+  work_name: 其他工种名称
+  strength: 浓度（强度）范围
+  test_time: 检测时间
+  # 附加信息
+  # PayloadDTO，authObject->getPayload()
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+  del_flag: 删除标识（0-未删除，1-删除）
+  

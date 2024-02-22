@@ -1,0 +1,23 @@
+﻿reportlist:
+ get:
+  summary: 获取体检报告列表
+ field:
+  test_num: 体检编号
+  physical_unit: 体检单位
+  id_card: 身份证号
+  check_date: 体检日期
+  check_result: 是否合格
+  statu: 审核状态
+  person_name: 姓名
+  sex: 性别
+  age: 年龄
+reportdetail:
+ download-reportdetail:
+  summary: 获取体检报告详情
+ field: 
+  pdfname: 体检报告pdf路径
+reportreview:
+ put:
+  summary: 体检报告审核（支持批量审核）
+ field: 
+  testNum: 体检编号   

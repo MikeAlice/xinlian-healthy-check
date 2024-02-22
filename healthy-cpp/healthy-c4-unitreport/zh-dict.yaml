@@ -1,0 +1,70 @@
+UnitReport:
+ field:
+  unit-code: 报告编号
+  physical-unit: 体检单位
+  physical-date: 体检日期
+  physical-project: 体检项目
+  concluding-observations: 体检意见
+  physical-type: 体检类型
+  entrust-unit: 委托单位
+  physical-number: 体检人数
+  evaluation-basis: 评论依据
+ get:
+  summary: 获取单位报告 
+unitreport:
+  unit:
+    name: "单位名称"
+    department : "所属部门"
+  order:
+    code: "订单编号"  
+    signingTime: "签订时间"
+    summary : "获取单位订单"
+    unreported : "未报"
+    reported : "已报"
+    groupInspection : "团"
+    sporadic : "零"
+  summaryTable:
+     type : "统计表类型"
+     PhysicalExaminationPersonnel: "体检人员汇总表"
+     ReviewPersonnel : "复查人员汇总表"
+     ReviewResults : "复查结果汇总表"
+     id : "编号"
+     personName : "姓名"
+     mobile : "手机号"
+     sex : "性别"
+     age : "年龄"
+     idCard : "身份证号码"
+     physicalDate : "体检时间"
+     status : "是否正常"
+     normal: "正常"
+     abnormal: "不正常"
+     noAbnormalConditions : "未见异常"
+     otherAbnormalities: "其他异常"
+     occupationalContraindications: "职业禁忌症"
+     physicalType : "体检类别"
+     checkRusult : "体检结果"
+     concludingObservations : "处理意见"
+     reason  : "复查原因"
+     checkProjectName : "复查项目"
+     hazardFactorCode : "危险因素"
+     workTypeText : "工种"
+     ExposureToHarmfulWorkExperience : "接触有害工龄（年）"
+unit:
+ phyType: 体检类型
+ phyUnit: 体检单位
+ begDate: 开始时间
+ endDate: 结束时间
+ code: 报告编号
+ phyDate: 体检日期
+ check: 查询报告
+ id: 唯一编号
+ choice: 选择报告 
+ enUnit: 委托单位
+ phyNum: 体检人数
+ hazFactor: 危险因素
+ phyProj: 体检项目
+ phyConclusion: 体检结论
+ downloadAddr: 下载地址
+ pdf: 
+  title: 健康检查结果总结报告
+ 

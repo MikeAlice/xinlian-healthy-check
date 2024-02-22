@@ -1,0 +1,211 @@
+groupItemIgno:
+ update:
+  summary: 忽略指定基础项目
+
+detail:
+ field:
+  project: 获取人员详情
+
+id:
+ query:
+  summary: 暂时没用
+
+term:
+ query:
+  summary: 获取术语名称列表
+
+info:
+ query:
+  summary: 保存总检信息
+ field:
+  id: 顺序号码（主键）
+  personId: 体检人员Id
+  inspectionDoctor: 总检医生
+  inspectionDate: 总检日期
+  medicalAdvice: 医学建议
+  handleOpinion: 处理意见
+
+report:
+ filed:
+  personId: 体检人员Id
+ query: 
+  summary: 报告预览
+
+pdf:
+ title: 个人信息
+ name: 姓名 
+ sex: 性别
+ age: 年龄
+ idCard: 身份证号 
+ mobile: 联系电话
+ physicalType: 体检种类
+ dept: 工作单位
+ conclusion: 健康检查结论
+ handleOpinion: 处理意见
+ inspectionDoctor: 主检医生
+ inspectionDate: 体检日期
+ diagnosticUnit: 检查单位  
+
+
+Dangerous:
+ query:
+  summary: 获取危险信息提示
+
+unit:
+ filed:
+  type: 体检类型
+  name: 单位名称
+  uscc: 信用代码
+  LinkMan: 联系人
+  LinkPhone: 联系电话
+
+positive:
+ query:
+  summary: 获取阳性结果列表
+  download: 获取阳性结果列表(excel导出执行 查询后就导出在zero-one-healthy-check\healthy-cpp\out\build\x64-Debug\healthy-c7-common\public\excel目录下)
+ filed:
+  id: 体检人员Id
+  summary: 示例
+  personname: 姓名
+  test_num: 体检编号
+  officename: 体检科室
+  order_group_item_project_name: 体检项目
+  result: 结果
+  unit_name: 单位名称
+  scope: 参考范围
+  diagnose_sum: 提示
+  crisis_degree: 危机程度
+  checkdate: 体检日期
+  isNormal: 结果状态
+  positive_name: 体检项目
+  heavy: 结果 
+excel:
+ sheet:
+  s1: 数据表1
+  s2: 数据表2
+ header:
+  h1:  姓名
+  h2:  体检编号
+  h3:  体检科室
+  h4:  体检项目
+  h5:  结果
+  h6:  单位
+  h7:  参考范围
+  h8:  提示
+  h9:  危急程度
+  h10: 体检日期  
+
+
+itemResult:
+ get:
+  summary: 获取体检项目结果明细
+ field:
+  itemId: 体检项目ID
+  personId: 人员ID
+  name: 体检项目名称
+  defaultValue: 结果
+  unitName: 单位
+  scope: 参考范围
+  succ: 查询成功
+  fail: 查询失败
+
+
+inquiry:
+ get:
+  summary: 获取问诊明细
+ field:
+  workYear: 工龄年段
+  workMonth: 工龄月段
+  maritalStatus: 结婚状况
+  needYear: 按需年龄
+  needMonth: 按需月龄
+  culture: 文化程度
+  homeAddress: 家庭地址
+  jobName: 工种名称
+  jobOrderName: 工种其他名称
+  department: 所属部门
+
+
+
+result:
+ query:
+  list: 获取添加项目结论列表
+ field:
+  id: 编号
+  orderGroupItemProjectName: 基础项目名
+  result: 结果
+  personId: 体检人ID
+  orderGroupItemId: 组合项目名
+
+
+review:
+ query:
+  summary: 复查(获取复查项目列表)
+ put:
+  summary: 复查(修改复查项目)
+ delete:
+  summary: 复查(删除复查项目)
+ pdf:
+  summary: 复查(复查报告查看)
+ field:
+  id: 唯一编号
+  personName: 姓名
+  personId: 体检人员id
+  checkProjectId: 复查项目id
+  checkProjectName: 复查项目名称
+  reviewExplain: 复查说明
+  reviewTime: 操作日期
+  createTime: 登记日期
+  state: 登记状态
+  hazardFactorCode: 危害因素
+  pdfDownloadUrl: pdf下载链接
+
+addNewItems:
+ post:
+  summary: 复查(新增复查项目)
+ field:
+  checkProjectId: 复查项目id
+  checkProjectName: 复查项目名称
+  portfolioProjectId: 组合项目id
+  portfolioProjectName: 组合项目名称
+  reason: 复查原因
+pdf:
+ title: 职业健康检查复查报告
+ personName: 姓名
+ personId: 体检人员id
+ checkProjectId: 复查项目id
+ checkProjectName: 复查项目名称
+ reviewExplain: 复查说明
+ reviewTime: 操作日期
+ createTime: 登记日期
+ state: 登记状态
+ hazardFactorCode: 危害因素
+
+personalReview:
+ update:
+  summary: 审查
+ field:
+  personId: 体检人员id
+  updateId: 更新人id
+
+wordFile:
+ download:
+  summary: 下载个人报告word
+ field:
+  fileUrl: 文件的完整路径http://123.123.123.123/----/1.docx
+  
+getUserName:
+ query:
+  summary: 获取体检人员名称列表
+ field:
+  ispass: 体检类型
+  isRecheck: 复查状态
+  startDate: 开始时间
+  endDate: 结束时间
+  personName: 姓名
+  testNum: 体检编号
+  dept: 单位名称
+  sex: 性别
+  age: 年龄
+  physicalType: 体检类型
+  sporadicPhysical: 是否零星体检(0-否，1-是)

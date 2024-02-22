@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <title>系统配置模块 API接口服务</title>
+      <link rel="stylesheet" href="https://unpkg.com/ant-design-vue@1.4.10/dist/antd.min.css" />
+      <style>
+      
+.content-line {
+  height: 25px;
+  line-height: 25px;
+}
+.content-line-count {
+  height: 35px;
+  line-height: 35px;
+}
+.title {
+  margin-top: 25px;
+}
+.knife4j-description {
+ /*  width: 90%;
+  margin: 15px auto; */
+  margin-top: 5px;
+}
+.divider {
+  margin: 4px 0;
+}
+.divider-count {
+  margin: 8px 0;
+}
+.knife4j-document {
+  margin-top: 30px;
+}
+.api-tab {
+  margin-top: 15px;
+
+  .ant-tag {
+    height: 32px;
+    line-height: 32px;
+  }
+}
+.knife4j-menu-api-deprecated {
+  text-decoration: line-through;
+}
+
+.knife4j-api-title {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #616368;
+  height: 35px;
+  line-height: 35px;
+}
+.knife4j-api-row {
+  height: 45px;
+  line-height: 45px;
+}
+
+.knife4j-api-summary {
+  border-color: #49cc90;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+}
+.knife4j-api-summary-method {
+  font-size: 14px;
+  font-weight: 700;
+  min-width: 80px;
+  padding: 6px 15px;
+  text-align: center;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  font-family: Titillium Web, sans-serif;
+  color: #fff;
+}
+.knife4j-api-summary-path {
+  font-size: 14px;
+  display: flex;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 3 auto;
+  flex: 0 3 auto;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  word-break: break-all;
+  padding: 0 32px;
+}
+
+.knife4j-api-post {
+  border-color: #49cc90;
+  background: rgba(73, 204, 144, 0.1);
+}
+.knife4j-api-post .knife4j-api-summary-method {
+  background: #49cc90;
+}
+
+.knife4j-api-get {
+  border-color: #61affe;
+  background: rgba(97, 175, 254, 0.1);
+}
+.knife4j-api-get .knife4j-api-summary-method {
+  background: #61affe;
+}
+.knife4j-api-head {
+  border-color: #9012fe;
+  background: rgba(144, 18, 254, 0.1);
+}
+.knife4j-api-head .knife4j-api-summary-method {
+  background: #9012fe;
+}
+.knife4j-api-put {
+  border-color: #fca130;
+  background: rgba(252, 161, 48, 0.1);
+}
+.knife4j-api-put .knife4j-api-summary-method {
+  background: #fca130;
+}
+.knife4j-api-delete {
+  border-color: #f93e3e;
+  background: rgba(249, 62, 62, 0.1);
+}
+.knife4j-api-delete .knife4j-api-summary-method {
+  background: #f93e3e;
+}
+.knife4j-api-options {
+  border-color: #0d5aa7;
+  background: rgba(13, 90, 167, 0.1);
+}
+.knife4j-api-options .knife4j-api-summary-method {
+  background: #0d5aa7;
+}
+.knife4j-api-patch {
+  border-color: #50e3c2;
+  background: rgba(80, 227, 194, 0.1);
+}
+.knife4j-api-patch .knife4j-api-summary-method {
+  background: #50e3c2;
+}
+#knife4jDoc ul{
+  padding-left: 10px;
+  list-style: none;
+  counter-reset: ordered;
+}
+
+#knife4jDoc ul li:before {
+  counter-increment: ordered;
+  content: counters(ordered,".")" ";
+  color:#1890ff;
+}
+.api-basic {
+  padding: 11px;
+}
+.api-basic-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+.api-basic-body {
+  font-size: 14px;
+  font-family: -webkit-body;
+}
+.knife4j-api-editor-show {
+  margin: 15px 0;
+  font: 100 12px/18px monaco, andale mono, courier new;
+  padding: 10px 12px;
+  border: #ccc 1px solid;
+  border-left-width: 4px;
+  background-color: #fefefe;
+  box-shadow: 0 0 4px #eee;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #444;
+}
+.knife4j-api-editor-show .string { color: green; }        /*字符串的样式*/
+.knife4j-api-editor-show .number { color: darkorange; }    /*数字的样式*/
+.knife4j-api-editor-show .boolean { color: blue; }        /*布尔型数据的样式*/
+.knife4j-api-editor-show .null { color: magenta; }        /*null值的样式*/
+.knife4j-api-editor-show .key { color: red; }            /*key值的样式*/
+.api-description {
+  border-left: 4px solid #ddd;
+  line-height: 30px;
+}
+.api-body-desc {
+  padding: 10px;
+  min-height: 35px;
+  box-sizing: border-box;
+  border: 1px solid #e8e8e8;
+}
+.ant-card-body {
+  padding: 5px;
+}
+.api-title {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  height: 30px;
+  line-height: 30px;
+  border-left: 4px solid #00ab6d;
+  text-indent: 8px;
+}
+.content-line {
+  height: 25px;
+  line-height: 25px;
+}
+.content-line-count {
+  height: 35px;
+  line-height: 35px;
+}
+.divider {
+  margin: 4px 0;
+}
+.knife4j-doc-m{
+  position: fixed;
+  height: 500px;
+  width: 400px;
+  border: 1px solid #b7b4b4;
+  overflow-y: auto;
+  right: 12px;
+  top: 40px;
+  z-index: 9999;
+  background: #fcfafa;
+}
+
+      </style>
+  </head>
+  <body>
+      <div id="knife4jDocument" class="resume_preview_page" style="margin:10px auto;width:88%">
+      <div class="htmledit_views" >
+        <a-row>
+          <!--基础信息-->
+          <a-row>
+            <a-col :span="24">
+              <div class="title">
+                <h2>{{instance.title}}</h2>
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>简介</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.description" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>作者</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.contact" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>版本</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.version" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>host</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.host" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>basePath</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.basePath" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>服务Url</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.termsOfService" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>分组名称</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.name" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>分组url</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.url" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>分组location</h3>
+                  </a-col>
+                  <a-col :span="19"><span v-html="instance.location" /></a-col>
+                </a-row>
+                <a-divider class="divider" />
+              </div>
+              <div class="knife4j-description">
+                <a-row class="content-line">
+                  <a-col :span="5">
+                    <h3>接口统计信息</h3>
+                  </a-col>
+                  <a-col :span="19">
+                    <a-row class="content-line-count" v-for="param in instance.pathArrs" :key="param.method">
+                      <a-col :span="3">
+                        {{param.method}}
+                      </a-col>
+                      <a-col :span="2">
+                        <a-tag color="#108ee9">{{param.count}}</a-tag>
+                      </a-col>
+                      <a-divider class="divider-count" />
+                    </a-row>
+                  </a-col>
+                </a-row>
+              </div>
+            </a-col>
+          </a-row>
+    
+          <!--目录-->
+          <a-row id="knife4j-doc-m" class="knife4j-doc-m">
+            <a-row style="float: right;width: 57px;z-index: 10000;overflow: hidden;">
+              <a-button type="link" id="btnHide">隐藏</a-button>
+            </a-row>
+            <a-row v-if="hideShow" id="knife4jDoc">
+              <ul>
+                <li><a href="#knife4jDocument">主页</a></li>
+                <li v-for="tag in tags" :key="tag.name">
+                  <a :href="'#'+tag.name">{{tag.name}}</a>
+                  <ul>
+                    <li v-for="c in tag.childrens" :key="c.id"><a :href="'#'+c.operationId">{{c.summary}}</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </a-row>
+          </a-row>
+          <!--分组API信息-->
+          <!--遍历tags-->
+          <a-row v-for="tag in tags" :key="tag.name">
+            <h1 :id="tag.name">{{tag.name}}</h1>
+            <div class="knife4j-document" v-for="api in tag.childrens">
+              <!--接口基本信息-->
+              <a-row>
+                <a-row :id="api.operationId" class="knife4j-api-title">
+                  <span v-if="api.deprecated" class="knife4j-menu-api-deprecated">
+                    {{ api.summary }}
+                  </span>
+                  <span v-else>
+                    {{ api.summary }}
+                  </span>
+                </a-row>
+                <a-row :class="'knife4j-api-' + api.methodType.toLowerCase()">
+                  <div class="knife4j-api-summary">
+                    <span class="knife4j-api-summary-method">{{ api.methodType }}</span>
+                    <span class="knife4j-api-summary-path">{{ api.showUrl }}</span>
+                  </div>
+                </a-row>
+                <a-row class="knife4j-api-row">
+                  <a-col :span="12">
+                    <a-row>
+                      <a-col class="api-basic-title" :span="6">请求数据类型</a-col>
+                      {{ api.consumes }}
+                    </a-row>
+                  </a-col>
+                  <a-col :span="12">
+                    <a-row>
+                      <a-col class="api-basic-title" :span="6">响应数据类型</a-col>
+                      {{ api.produces }}
+                    </a-row>
+                  </a-col>
+                </a-row>
+              </a-row>
+              <div v-if="api.author">
+                <div class="api-title">
+                  开发者
+                </div>
+                <div v-if="api.author" v-html="api.author" class="api-body-desc"></div>
+              </div>
+              <!--接口描述-->
+              <div v-if="api.description">
+                <div class="api-title">
+                  接口描述
+                </div>
+                <div
+                  v-if="api.description"
+                  v-html="api.description"
+                  class="api-body-desc"
+                ></div>
+              </div>
+              <!--请求示例-->
+              <div v-if="api.requestValue">
+                <div class="api-title">
+                  请求示例
+                </div>
+                <pre
+                  class="knife4j-api-editor-show"
+                  v-html="formaterJson(api.requestValue)"
+                ></pre>
+              </div>
+              <div class="api-title">
+              请求参数
+              </div>
+              <a-table default-expand-all-rows :columns="columns" :data-source="api.reqParameters"
+                :row-key="genUnionTableKey"
+                size="small"
+                :pagination="page" >
+                  <template slot="requireTemplate" slot-scope="text">
+                    <span v-if="text" style="color:red">{{ text.toLocaleString() }}</span>
+                    <span v-else>{{ text.toLocaleString() }}</span>
+                  </template>
+
+                  <template slot="typeTemplate" slot-scope="text">
+                    <span :class="'knife4j-request-' + text">{{ text }}</span>
+                  </template>
+
+                  <template slot="datatypeTemplate" slot-scope="text, record">
+                    <data-type :text="text" :record="record"></data-type>
+                  </template>
+              </a-table>
+              <!--响应状态-->
+              <div class="api-title">
+                响应状态
+              </div>
+              <a-table
+                :columns="responseStatuscolumns"
+                :data-source="api.responseCodes"
+                row-key="code"
+                size="small"
+                :pagination="page"
+              >
+                <template slot="descriptionTemplate" slot-scope="text">
+                  <div v-html="text"></div>
+                </template>
+              </a-table>
+              <!--响应参数-->
+              <!--响应参数需要判断是否存在多个code-schema的情况-->
+              <div v-if="api.multipartResponseSchema">
+                <!--多个响应编码code的情况在离线文档中需要单独遍历分开-->
+                <a-tabs v-for="resp in api.multipCodeDatas" :key="resp.code">
+                  <a-tab-pane :tab="resp.code">
+                    <!--判断响应头-->
+                    <div v-if="resp.responseHeaderParameters">
+                      <div class="api-title">
+                        响应Header
+                      </div>
+                      <a-table
+                        :columns="responseHeaderColumns"
+                        :data-source="resp.responseHeaderParameters"
+                        row-key="id"
+                        size="small"
+                        :pagination="page"
+                      >
+                      </a-table>
+                    </div>
+                    <!--响应参数-->
+                    <div class="api-title">
+                      响应参数
+                    </div>
+                    <a-table
+                      :columns="responseParametersColumns"
+                      :data-source="resp.data"
+                      row-key="id"
+                      size="small"
+                      :pagination="page"
+                    >
+                    </a-table>
+                    <div class="api-title">
+                      响应示例
+                    </div>
+                    <div class="api-editor-show" v-if="resp.responseBasicType">
+                      {{ resp.responseText }}
+                    </div>
+                    <pre
+                      class="knife4j-api-editor-show"
+                      v-else
+                      v-html="formaterJson(resp.responseValue)"
+                    ></pre>
+                    <!-- <editor-show :value="resp.responseBasicType ? resp.responseText : resp.responseValue"></editor-show> -->
+                    <!-- <editor :value="resp.responseBasicType ? resp.responseText : resp.responseValue" @init="multiResponseSampleEditorInit" lang="json" theme="eclipse" width="100%" :height="editorMultiHeight"></editor> -->
+                  </a-tab-pane>
+                </a-tabs>
+              </div>
+              <div v-else>
+                <!--判断响应头-->
+                <div v-if="api.responseHeaderParameters">
+                  <div class="api-title">
+                    响应Header
+                  </div>
+                  <a-table
+                    :columns="responseHeaderColumns"
+                    :data-source="api.responseHeaderParameters"
+                    row-key="id"
+                    size="small"
+                    :pagination="page"
+                  >
+                  </a-table>
+                </div>
+                <!--响应参数-->
+                <div class="api-title">
+                  响应参数
+                </div>
+                <a-table
+                  :columns="responseParametersColumns"
+                  :data-source="api.multipData.data"
+                  row-key="id"
+                  size="small"
+                  :pagination="page"
+                >
+                </a-table>
+                <div class="api-title">
+                  响应示例
+                </div>
+                <div class="api-editor-show" v-if="api.multipData.responseBasicType">
+                  {{ api.multipData.responseText }}
+                </div>
+                <pre
+                  class="knife4j-api-editor-show"
+                  v-else
+                  v-html="formaterJson(api.multipData.responseValue)"
+                ></pre>
+              </div>
+              
+
+            <!--接口遍历结束-->
+            </div>
+          </a-row>
+      </a-row>
+
+      </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@1.4.10/dist/antd.min.js"></script>
+      <script type="text/javascript">
+      function getData(){
+        var datas={"instance":{"title":"系统配置模块 API接口服务","description":"系统配置模块 API接口服务","contact":"零壹星球","version":"1.0.0","host":"localhost:10010","basePath":"/","termsOfService":"","name":"sysmanager","url":"/v2/api-docs?group=sysmanager","location":"/v2/api-docs?group=sysmanager","pathArrs":[{"method":"POST","count":1},{"method":"GET","count":4},{"method":"DELETE","count":1}]},"hideShow":true,"tags":[{"name":"direct-source-controller","description":null,"order":2147483647,"author":null,"childrens":[{"id":"9df4fa8edca115b7ae06f62d62fe3a44","operationId":"deleteByIdsUsingPOST","deprecated":false,"summary":"根据id批量删除数据字典","methodType":"POST","showUrl":"/j3-directSource/deleteByIds","consumes":["application/json"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"ids","children":null,"description":"ids","in":"query","require":true,"type":"array","schemaValue":"string"}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«boolean»"},{"code":"201","description":"Created","schema":null},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null},{"code":"404","description":"Not Found","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param5","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":null,"description":"数据对象","id":"param6","type":"boolean","schemaValue":null},{"name":"message","children":null,"description":"提示消息","id":"param7","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": true,\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«boolean»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": true,\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":true,"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param5","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param6","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param7","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«boolean»","responseRefParameters":[],"responseTreetableRefParameters":[],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param5","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param6","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param7","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}},{"id":"3bf22f0e681424c37cdb2b2ffd0fe6a1","operationId":"queryByWordTypeUsingGET","deprecated":false,"summary":"获取工种名称列表","methodType":"GET","showUrl":"/j3-directSource/queryByWordType","consumes":["application/x-www-form-urlencoded"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"dictld","children":null,"description":"字典id","in":"query","require":false,"type":"string","schemaValue":null},{"name":"name","children":null,"description":"","in":"query","require":false,"type":"string","schemaValue":null},{"name":"order","children":null,"description":"排序规则","in":"query","require":false,"type":"string","schemaValue":null},{"name":"pageNumber","children":null,"description":"查询页码","in":"query","require":false,"type":"integer(int64)","schemaValue":null},{"name":"pageSize","children":null,"description":"查询条数","in":"query","require":false,"type":"integer(int64)","schemaValue":null},{"name":"sort","children":null,"description":"根据xx分类","in":"query","require":false,"type":"string","schemaValue":null},{"name":"status","children":null,"description":"是否启用 0 启用 1 禁用","in":"query","require":false,"type":"integer(int32)","schemaValue":null},{"name":"title","children":null,"description":"数据名称","in":"query","require":false,"type":"string","schemaValue":null}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«List«获取工作名称列表请求体»»"},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null},{"code":"404","description":"Not Found","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param30","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":[{"name":"dictld","children":null,"description":"字典id","id":"param68","type":"string","schemaValue":null},{"name":"name","children":null,"description":"","id":"param69","type":"string","schemaValue":null},{"name":"order","children":null,"description":"排序规则","id":"param70","type":"string","schemaValue":null},{"name":"pageNumber","children":null,"description":"查询页码","id":"param71","type":"integer(int64)","schemaValue":null},{"name":"pageSize","children":null,"description":"查询条数","id":"param72","type":"integer(int64)","schemaValue":null},{"name":"sort","children":null,"description":"根据xx分类","id":"param73","type":"string","schemaValue":null},{"name":"status","children":null,"description":"是否启用 0 启用 1 禁用","id":"param74","type":"integer(int32)","schemaValue":null},{"name":"title","children":null,"description":"数据名称","id":"param75","type":"string","schemaValue":null}],"description":"数据对象","id":"param31","type":"array","schemaValue":"获取工作名称列表请求体"},{"name":"message","children":null,"description":"提示消息","id":"param48","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"dictld\": \"\",\n\t\t\t\"name\": \"\",\n\t\t\t\"order\": \"asc\",\n\t\t\t\"pageNumber\": 1,\n\t\t\t\"pageSize\": 10,\n\t\t\t\"sort\": \"\",\n\t\t\t\"status\": 0,\n\t\t\t\"title\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«List«获取工作名称列表请求体»»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"dictld\": \"\",\n\t\t\t\"name\": \"\",\n\t\t\t\"order\": \"asc\",\n\t\t\t\"pageNumber\": 1,\n\t\t\t\"pageSize\": 10,\n\t\t\t\"sort\": \"\",\n\t\t\t\"status\": 0,\n\t\t\t\"title\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":[{"dictld":"","name":"","order":"asc","pageNumber":1,"pageSize":10,"sort":"","status":0,"title":""}],"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param30","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"获取工作名称列表请求体","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param31","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"字典id","enum":null,"id":"param68","ignoreFilterName":null,"in":null,"level":1,"name":"dictld","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"","enum":null,"id":"param69","ignoreFilterName":null,"in":null,"level":1,"name":"name","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序规则","enum":null,"example":"asc","id":"param70","ignoreFilterName":null,"in":null,"level":1,"name":"order","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"查询页码","enum":null,"example":1,"id":"param71","ignoreFilterName":null,"in":null,"level":1,"name":"pageNumber","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"查询条数","enum":null,"example":10,"id":"param72","ignoreFilterName":null,"in":null,"level":1,"name":"pageSize","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"根据xx分类","enum":null,"id":"param73","ignoreFilterName":null,"in":null,"level":1,"name":"sort","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"是否启用 0 启用 1 禁用","enum":null,"id":"param74","ignoreFilterName":null,"in":null,"level":1,"name":"status","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"数据名称","enum":null,"id":"param75","ignoreFilterName":null,"in":null,"level":1,"name":"title","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["获取工作名称列表请求体"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param48","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«List«获取工作名称列表请求体»»","responseRefParameters":[{"name":"获取工作名称列表请求体","params":[{"name":"dictld","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"字典id","txtValue":null,"enum":null,"id":"param32","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"name","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"","txtValue":null,"enum":null,"id":"param33","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"order","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序规则","txtValue":null,"enum":null,"id":"param34","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"pageNumber","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"查询页码","txtValue":null,"enum":null,"id":"param35","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"pageSize","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"查询条数","txtValue":null,"enum":null,"id":"param36","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"sort","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"根据xx分类","txtValue":null,"enum":null,"id":"param37","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"status","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"是否启用 0 启用 1 禁用","txtValue":null,"enum":null,"id":"param38","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"title","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据名称","txtValue":null,"enum":null,"id":"param39","pid":"param31","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}],"responseTreetableRefParameters":[{"init":false,"id":"param31","name":"获取工作名称列表请求体","params":[{"name":"dictld","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"字典id","txtValue":null,"enum":null,"id":"param40","pid":"param31","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"name","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"","txtValue":null,"enum":null,"id":"param41","pid":"param31","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"order","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序规则","txtValue":null,"enum":null,"id":"param42","pid":"param31","level":1,"show":true,"readOnly":false,"example":"asc","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"pageNumber","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"查询页码","txtValue":null,"enum":null,"id":"param43","pid":"param31","level":1,"show":true,"readOnly":false,"example":1,"childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"pageSize","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"查询条数","txtValue":null,"enum":null,"id":"param44","pid":"param31","level":1,"show":true,"readOnly":false,"example":10,"childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"sort","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"根据xx分类","txtValue":null,"enum":null,"id":"param45","pid":"param31","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"status","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"是否启用 0 启用 1 禁用","txtValue":null,"enum":null,"id":"param46","pid":"param31","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]},{"name":"title","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据名称","txtValue":null,"enum":null,"id":"param47","pid":"param31","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"]}],"level":1,"childrenTypes":[]}],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param30","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"获取工作名称列表请求体","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param31","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"字典id","enum":null,"id":"param68","ignoreFilterName":null,"in":null,"level":1,"name":"dictld","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"","enum":null,"id":"param69","ignoreFilterName":null,"in":null,"level":1,"name":"name","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序规则","enum":null,"example":"asc","id":"param70","ignoreFilterName":null,"in":null,"level":1,"name":"order","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"查询页码","enum":null,"example":1,"id":"param71","ignoreFilterName":null,"in":null,"level":1,"name":"pageNumber","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"查询条数","enum":null,"example":10,"id":"param72","ignoreFilterName":null,"in":null,"level":1,"name":"pageSize","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"根据xx分类","enum":null,"id":"param73","ignoreFilterName":null,"in":null,"level":1,"name":"sort","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"是否启用 0 启用 1 禁用","enum":null,"id":"param74","ignoreFilterName":null,"in":null,"level":1,"name":"status","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"数据名称","enum":null,"id":"param75","ignoreFilterName":null,"in":null,"level":1,"name":"title","parentTypes":["获取工作名称列表请求体","获取工作名称列表请求体"],"pid":"param31","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["获取工作名称列表请求体"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param48","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}}],"hasNew":true,"hasChanged":false},{"name":"message-controller","description":null,"order":2147483647,"author":null,"childrens":[{"id":"6748802c92b998f905ece30aee7cd726","operationId":"deleteByIdsUsingDELETE","deprecated":false,"summary":"deleteByIds","methodType":"DELETE","showUrl":"/j3-message/deleteByIds","consumes":["application/x-www-form-urlencoded"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"ids","children":null,"description":"ids","in":"query","require":true,"type":"array","schemaValue":"string"}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«boolean»"},{"code":"204","description":"No Content","schema":null},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param77","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":null,"description":"数据对象","id":"param78","type":"boolean","schemaValue":null},{"name":"message","children":null,"description":"提示消息","id":"param79","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": true,\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«boolean»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": true,\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":true,"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param77","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param78","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param79","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«boolean»","responseRefParameters":[],"responseTreetableRefParameters":[],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param77","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param78","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param79","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}},{"id":"d03645377be7c9dfa96efad9d50281b5","operationId":"selectMessageDetailPageUsingGET","deprecated":false,"summary":"获取消息详情页列表","methodType":"GET","showUrl":"/j3-message/queryMessageDetail","consumes":["application/x-www-form-urlencoded"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"createTime","children":null,"description":"创建时间","in":"query","require":false,"type":"string(date-time)","schemaValue":null},{"name":"messageId","children":null,"description":"消息Id","in":"query","require":false,"type":"string","schemaValue":null},{"name":"pageIndex","children":null,"description":"查询页码","in":"query","require":false,"type":"integer(int64)","schemaValue":null},{"name":"pageSize","children":null,"description":"查询条数","in":"query","require":false,"type":"integer(int64)","schemaValue":null},{"name":"status","children":null,"description":"状态(未读-0，已读-1，回收站-2)","in":"query","require":false,"type":"integer(int32)","schemaValue":null},{"name":"userId","children":null,"description":"用户id","in":"query","require":false,"type":"string","schemaValue":null}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«PageDTO«响应消息详情对象»»"},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null},{"code":"404","description":"Not Found","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param102","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":[{"name":"pageIndex","children":null,"description":"当前页码","id":"param148","type":"integer(int64)","schemaValue":null},{"name":"pageSize","children":null,"description":"每页显示最大数据条数","id":"param149","type":"integer(int64)","schemaValue":null},{"name":"pages","children":null,"description":"总页数","id":"param150","type":"integer(int64)","schemaValue":null},{"name":"rows","children":[{"name":"createBy","children":null,"description":"发送用户","id":"param152","type":"string","schemaValue":null},{"name":"createTime","children":null,"description":"创建时间","id":"param153","type":"string","schemaValue":null},{"name":"id","children":null,"description":"自增id","id":"param154","type":"integer","schemaValue":null},{"name":"status","children":null,"description":"状态","id":"param155","type":"integer","schemaValue":null},{"name":"updateTime","children":null,"description":"更新时间","id":"param156","type":"string","schemaValue":null}],"description":"当前页数据列表","id":"param151","type":"array","schemaValue":"响应消息详情对象"},{"name":"total","children":null,"description":"总条数","id":"param157","type":"integer(int64)","schemaValue":null}],"description":"数据对象","id":"param103","type":"PageDTO«响应消息详情对象»","schemaValue":"PageDTO«响应消息详情对象»"},{"name":"message","children":null,"description":"提示消息","id":"param124","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": {\n\t\t\"pageIndex\": 1,\n\t\t\"pageSize\": 10,\n\t\t\"pages\": 100,\n\t\t\"rows\": [\n\t\t\t{\n\t\t\t\t\"createBy\": \"\",\n\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"status\": 0,\n\t\t\t\t\"updateTime\": \"\"\n\t\t\t}\n\t\t],\n\t\t\"total\": 100000\n\t},\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«PageDTO«响应消息详情对象»»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": {\n\t\t\"pageIndex\": 1,\n\t\t\"pageSize\": 10,\n\t\t\"pages\": 100,\n\t\t\"rows\": [\n\t\t\t{\n\t\t\t\t\"createBy\": \"\",\n\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"status\": 0,\n\t\t\t\t\"updateTime\": \"\"\n\t\t\t}\n\t\t],\n\t\t\"total\": 100000\n\t},\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":{"pageIndex":1,"pageSize":10,"pages":100,"rows":[{"createBy":"","createTime":"","id":1,"status":0,"updateTime":""}],"total":100000},"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param102","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"PageDTO«响应消息详情对象»","in":null,"schema":true,"schemaValue":"PageDTO«响应消息详情对象»","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param103","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"当前页码","enum":null,"example":1,"id":"param148","ignoreFilterName":null,"in":null,"level":1,"name":"pageIndex","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"每页显示最大数据条数","enum":null,"example":10,"id":"param149","ignoreFilterName":null,"in":null,"level":1,"name":"pageSize","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"总页数","enum":null,"example":100,"id":"param150","ignoreFilterName":null,"in":null,"level":1,"name":"pages","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":[{"name":"createBy","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"发送用户","txtValue":null,"enum":null,"id":"param152","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"createTime","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param153","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"id","ignoreFilterName":null,"require":true,"type":"integer","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"自增id","txtValue":null,"enum":null,"id":"param154","pid":"param151","level":2,"show":true,"example":1,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"status","ignoreFilterName":null,"require":true,"type":"integer","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态","txtValue":null,"enum":null,"id":"param155","pid":"param151","level":2,"show":true,"example":0,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"updateTime","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"更新时间","txtValue":null,"enum":null,"id":"param156","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]}],"childrenTypes":[],"def":null,"description":"当前页数据列表","enum":null,"id":"param151","ignoreFilterName":null,"in":null,"level":1,"name":"rows","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":true,"schemaValue":"响应消息详情对象","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"总条数","enum":null,"example":100000,"id":"param157","ignoreFilterName":null,"in":null,"level":1,"name":"total","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["PageDTO«响应消息详情对象»"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param124","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«PageDTO«响应消息详情对象»»","responseRefParameters":[{"name":"PageDTO«响应消息详情对象»","params":[{"name":"pageIndex","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"当前页码","txtValue":null,"enum":null,"id":"param104","pid":"param103","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"pageSize","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"每页显示最大数据条数","txtValue":null,"enum":null,"id":"param105","pid":"param103","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"pages","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"总页数","txtValue":null,"enum":null,"id":"param106","pid":"param103","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"rows","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"响应消息详情对象","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"当前页数据列表","txtValue":null,"enum":null,"id":"param107","pid":"param103","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"total","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"总条数","txtValue":null,"enum":null,"id":"param113","pid":"param103","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]},{"name":"响应消息详情对象","params":[{"name":"createBy","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"发送用户","txtValue":null,"enum":null,"id":"param108","pid":"param107","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param109","pid":"param107","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"id","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"自增id","txtValue":null,"enum":null,"id":"param110","pid":"param107","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"status","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态","txtValue":null,"enum":null,"id":"param111","pid":"param107","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"更新时间","txtValue":null,"enum":null,"id":"param112","pid":"param107","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}],"responseTreetableRefParameters":[{"init":false,"id":"param103","name":"PageDTO«响应消息详情对象»","params":[{"name":"pageIndex","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"当前页码","txtValue":null,"enum":null,"id":"param114","pid":"param103","level":1,"show":true,"readOnly":false,"example":1,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"]},{"name":"pageSize","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"每页显示最大数据条数","txtValue":null,"enum":null,"id":"param115","pid":"param103","level":1,"show":true,"readOnly":false,"example":10,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"]},{"name":"pages","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"总页数","txtValue":null,"enum":null,"id":"param116","pid":"param103","level":1,"show":true,"readOnly":false,"example":100,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"]},{"name":"rows","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"响应消息详情对象","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"当前页数据列表","txtValue":null,"enum":null,"id":"param117","pid":"param103","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"]},{"name":"total","ignoreFilterName":null,"require":false,"type":"integer(int64)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"总条数","txtValue":null,"enum":null,"id":"param123","pid":"param103","level":1,"show":true,"readOnly":false,"example":100000,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"]}],"level":1,"childrenTypes":[]},{"init":false,"id":"param117","name":"响应消息详情对象","params":[{"name":"createBy","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"发送用户","txtValue":null,"enum":null,"id":"param118","pid":"param117","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param119","pid":"param117","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"id","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"自增id","txtValue":null,"enum":null,"id":"param120","pid":"param117","level":1,"show":true,"readOnly":false,"example":1,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"status","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态","txtValue":null,"enum":null,"id":"param121","pid":"param117","level":1,"show":true,"readOnly":false,"example":0,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"更新时间","txtValue":null,"enum":null,"id":"param122","pid":"param117","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]}],"level":1,"childrenTypes":[]}],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param102","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"PageDTO«响应消息详情对象»","in":null,"schema":true,"schemaValue":"PageDTO«响应消息详情对象»","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param103","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"当前页码","enum":null,"example":1,"id":"param148","ignoreFilterName":null,"in":null,"level":1,"name":"pageIndex","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"每页显示最大数据条数","enum":null,"example":10,"id":"param149","ignoreFilterName":null,"in":null,"level":1,"name":"pageSize","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"总页数","enum":null,"example":100,"id":"param150","ignoreFilterName":null,"in":null,"level":1,"name":"pages","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null},{"children":[{"name":"createBy","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"发送用户","txtValue":null,"enum":null,"id":"param152","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"createTime","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param153","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"id","ignoreFilterName":null,"require":true,"type":"integer","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"自增id","txtValue":null,"enum":null,"id":"param154","pid":"param151","level":2,"show":true,"example":1,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"status","ignoreFilterName":null,"require":true,"type":"integer","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态","txtValue":null,"enum":null,"id":"param155","pid":"param151","level":2,"show":true,"example":0,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]},{"name":"updateTime","ignoreFilterName":null,"require":true,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"更新时间","txtValue":null,"enum":null,"id":"param156","pid":"param151","level":2,"show":true,"childrenTypes":[],"children":null,"parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»","响应消息详情对象"]}],"childrenTypes":[],"def":null,"description":"当前页数据列表","enum":null,"id":"param151","ignoreFilterName":null,"in":null,"level":1,"name":"rows","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":true,"schemaValue":"响应消息详情对象","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"总条数","enum":null,"example":100000,"id":"param157","ignoreFilterName":null,"in":null,"level":1,"name":"total","parentTypes":["PageDTO«响应消息详情对象»","PageDTO«响应消息详情对象»"],"pid":"param103","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int64)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["PageDTO«响应消息详情对象»"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param124","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}}],"hasNew":false,"hasChanged":false},{"name":"type-lib-controller","description":null,"order":2147483647,"author":null,"childrens":[{"id":"69b467007225edd6243a5b2052fb579f","operationId":"getAllProTypeByTreeUsingGET","deprecated":false,"summary":"获取类型树接口","methodType":"GET","showUrl":"/j3-typeLib/get-TProTypeTree","consumes":["application/x-www-form-urlencoded"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"parentId","children":null,"description":"类型父节点id","in":"query","require":false,"type":"string","schemaValue":null},{"name":"typeName","children":null,"description":"类型名称","in":"query","require":false,"type":"string","schemaValue":null}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«List«类型树返回vo»»"},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null},{"code":"404","description":"Not Found","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param178","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":[{"name":"_loading","children":null,"description":"异步加载","id":"param244","type":"boolean","schemaValue":null},{"name":"children","children":null,"description":"子集","id":"param245","type":"array","schemaValue":"类型树返回vo"},{"name":"createId","children":null,"description":"创建人","id":"param246","type":"string","schemaValue":null},{"name":"createTime","children":null,"description":"创建时间","id":"param247","type":"string(date-time)","schemaValue":null},{"name":"delFlag","children":null,"description":"删除状态(0-未删除，1-已删除)","id":"param248","type":"integer(int32)","schemaValue":null},{"name":"deleteId","children":null,"description":"删除人","id":"param249","type":"string","schemaValue":null},{"name":"deleteTime","children":null,"description":"删除时间","id":"param250","type":"string(date-time)","schemaValue":null},{"name":"id","children":null,"description":"主键id","id":"param251","type":"string","schemaValue":null},{"name":"orderNum","children":null,"description":"排序","id":"param252","type":"integer(int32)","schemaValue":null},{"name":"parentId","children":null,"description":"父节点id","id":"param253","type":"string","schemaValue":null},{"name":"remark","children":null,"description":"备注","id":"param254","type":"string","schemaValue":null},{"name":"typeCode","children":null,"description":"类型编码","id":"param255","type":"string","schemaValue":null},{"name":"typeName","children":null,"description":"类型名称","id":"param256","type":"string","schemaValue":null},{"name":"updateId","children":null,"description":"修改人","id":"param257","type":"string","schemaValue":null},{"name":"updateTime","children":null,"description":"修改时间","id":"param258","type":"string(date-time)","schemaValue":null}],"description":"数据对象","id":"param179","type":"array","schemaValue":"类型树返回vo"},{"name":"message","children":null,"description":"提示消息","id":"param210","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"_loading\": true,\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"_loading\": true,\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{}\n\t\t\t\t\t],\n\t\t\t\t\t\"createId\": \"\",\n\t\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\t\"delFlag\": 0,\n\t\t\t\t\t\"deleteId\": \"\",\n\t\t\t\t\t\"deleteTime\": \"\",\n\t\t\t\t\t\"id\": \"\",\n\t\t\t\t\t\"orderNum\": 0,\n\t\t\t\t\t\"parentId\": \"\",\n\t\t\t\t\t\"remark\": \"\",\n\t\t\t\t\t\"typeCode\": \"\",\n\t\t\t\t\t\"typeName\": \"\",\n\t\t\t\t\t\"updateId\": \"\",\n\t\t\t\t\t\"updateTime\": \"\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"createId\": \"\",\n\t\t\t\"createTime\": \"\",\n\t\t\t\"delFlag\": 0,\n\t\t\t\"deleteId\": \"\",\n\t\t\t\"deleteTime\": \"\",\n\t\t\t\"id\": \"\",\n\t\t\t\"orderNum\": 0,\n\t\t\t\"parentId\": \"\",\n\t\t\t\"remark\": \"\",\n\t\t\t\"typeCode\": \"\",\n\t\t\t\"typeName\": \"\",\n\t\t\t\"updateId\": \"\",\n\t\t\t\"updateTime\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«List«类型树返回vo»»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"_loading\": true,\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"_loading\": true,\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{}\n\t\t\t\t\t],\n\t\t\t\t\t\"createId\": \"\",\n\t\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\t\"delFlag\": 0,\n\t\t\t\t\t\"deleteId\": \"\",\n\t\t\t\t\t\"deleteTime\": \"\",\n\t\t\t\t\t\"id\": \"\",\n\t\t\t\t\t\"orderNum\": 0,\n\t\t\t\t\t\"parentId\": \"\",\n\t\t\t\t\t\"remark\": \"\",\n\t\t\t\t\t\"typeCode\": \"\",\n\t\t\t\t\t\"typeName\": \"\",\n\t\t\t\t\t\"updateId\": \"\",\n\t\t\t\t\t\"updateTime\": \"\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"createId\": \"\",\n\t\t\t\"createTime\": \"\",\n\t\t\t\"delFlag\": 0,\n\t\t\t\"deleteId\": \"\",\n\t\t\t\"deleteTime\": \"\",\n\t\t\t\"id\": \"\",\n\t\t\t\"orderNum\": 0,\n\t\t\t\"parentId\": \"\",\n\t\t\t\"remark\": \"\",\n\t\t\t\"typeCode\": \"\",\n\t\t\t\"typeName\": \"\",\n\t\t\t\"updateId\": \"\",\n\t\t\t\"updateTime\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":[{"_loading":true,"children":[{"_loading":true,"children":[{}],"createId":"","createTime":"","delFlag":0,"deleteId":"","deleteTime":"","id":"","orderNum":0,"parentId":"","remark":"","typeCode":"","typeName":"","updateId":"","updateTime":""}],"createId":"","createTime":"","delFlag":0,"deleteId":"","deleteTime":"","id":"","orderNum":0,"parentId":"","remark":"","typeCode":"","typeName":"","updateId":"","updateTime":""}],"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param178","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param179","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"异步加载","enum":null,"id":"param244","ignoreFilterName":null,"in":null,"level":1,"name":"_loading","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"boolean","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"子集","enum":null,"id":"param245","ignoreFilterName":null,"in":null,"level":1,"name":"children","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":true,"schemaValue":"类型树返回vo","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建人","enum":null,"id":"param246","ignoreFilterName":null,"in":null,"level":1,"name":"createId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建时间","enum":null,"id":"param247","ignoreFilterName":null,"in":null,"level":1,"name":"createTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除状态(0-未删除，1-已删除)","enum":null,"id":"param248","ignoreFilterName":null,"in":null,"level":1,"name":"delFlag","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除人","enum":null,"id":"param249","ignoreFilterName":null,"in":null,"level":1,"name":"deleteId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除时间","enum":null,"id":"param250","ignoreFilterName":null,"in":null,"level":1,"name":"deleteTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"主键id","enum":null,"id":"param251","ignoreFilterName":null,"in":null,"level":1,"name":"id","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序","enum":null,"id":"param252","ignoreFilterName":null,"in":null,"level":1,"name":"orderNum","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"父节点id","enum":null,"id":"param253","ignoreFilterName":null,"in":null,"level":1,"name":"parentId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"备注","enum":null,"id":"param254","ignoreFilterName":null,"in":null,"level":1,"name":"remark","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型编码","enum":null,"id":"param255","ignoreFilterName":null,"in":null,"level":1,"name":"typeCode","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型名称","enum":null,"id":"param256","ignoreFilterName":null,"in":null,"level":1,"name":"typeName","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改人","enum":null,"id":"param257","ignoreFilterName":null,"in":null,"level":1,"name":"updateId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改时间","enum":null,"id":"param258","ignoreFilterName":null,"in":null,"level":1,"name":"updateTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["类型树返回vo"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param210","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«List«类型树返回vo»»","responseRefParameters":[{"name":"类型树返回vo","params":[{"name":"_loading","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"异步加载","txtValue":null,"enum":null,"id":"param180","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"children","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"子集","txtValue":null,"enum":null,"id":"param181","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"createId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建人","txtValue":null,"enum":null,"id":"param182","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param183","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"delFlag","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除状态(0-未删除，1-已删除)","txtValue":null,"enum":null,"id":"param184","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"deleteId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除人","txtValue":null,"enum":null,"id":"param185","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"deleteTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除时间","txtValue":null,"enum":null,"id":"param186","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"id","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"主键id","txtValue":null,"enum":null,"id":"param187","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"orderNum","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序","txtValue":null,"enum":null,"id":"param188","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"parentId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"父节点id","txtValue":null,"enum":null,"id":"param189","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"remark","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"备注","txtValue":null,"enum":null,"id":"param190","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"typeCode","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型编码","txtValue":null,"enum":null,"id":"param191","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"typeName","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型名称","txtValue":null,"enum":null,"id":"param192","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"updateId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改人","txtValue":null,"enum":null,"id":"param193","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改时间","txtValue":null,"enum":null,"id":"param194","pid":"param179","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}],"responseTreetableRefParameters":[{"init":false,"id":"param179","name":"类型树返回vo","params":[{"name":"_loading","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"异步加载","txtValue":null,"enum":null,"id":"param195","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"children","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"子集","txtValue":null,"enum":null,"id":"param196","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"createId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建人","txtValue":null,"enum":null,"id":"param197","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param198","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"delFlag","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除状态(0-未删除，1-已删除)","txtValue":null,"enum":null,"id":"param199","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"deleteId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除人","txtValue":null,"enum":null,"id":"param200","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"deleteTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除时间","txtValue":null,"enum":null,"id":"param201","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"id","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"主键id","txtValue":null,"enum":null,"id":"param202","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"orderNum","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序","txtValue":null,"enum":null,"id":"param203","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"parentId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"父节点id","txtValue":null,"enum":null,"id":"param204","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"remark","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"备注","txtValue":null,"enum":null,"id":"param205","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"typeCode","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型编码","txtValue":null,"enum":null,"id":"param206","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"typeName","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型名称","txtValue":null,"enum":null,"id":"param207","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"updateId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改人","txtValue":null,"enum":null,"id":"param208","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改时间","txtValue":null,"enum":null,"id":"param209","pid":"param179","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]}],"level":1,"childrenTypes":[]}],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param178","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param179","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"异步加载","enum":null,"id":"param244","ignoreFilterName":null,"in":null,"level":1,"name":"_loading","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"boolean","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"子集","enum":null,"id":"param245","ignoreFilterName":null,"in":null,"level":1,"name":"children","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":true,"schemaValue":"类型树返回vo","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建人","enum":null,"id":"param246","ignoreFilterName":null,"in":null,"level":1,"name":"createId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建时间","enum":null,"id":"param247","ignoreFilterName":null,"in":null,"level":1,"name":"createTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除状态(0-未删除，1-已删除)","enum":null,"id":"param248","ignoreFilterName":null,"in":null,"level":1,"name":"delFlag","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除人","enum":null,"id":"param249","ignoreFilterName":null,"in":null,"level":1,"name":"deleteId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除时间","enum":null,"id":"param250","ignoreFilterName":null,"in":null,"level":1,"name":"deleteTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"主键id","enum":null,"id":"param251","ignoreFilterName":null,"in":null,"level":1,"name":"id","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序","enum":null,"id":"param252","ignoreFilterName":null,"in":null,"level":1,"name":"orderNum","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"父节点id","enum":null,"id":"param253","ignoreFilterName":null,"in":null,"level":1,"name":"parentId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"备注","enum":null,"id":"param254","ignoreFilterName":null,"in":null,"level":1,"name":"remark","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型编码","enum":null,"id":"param255","ignoreFilterName":null,"in":null,"level":1,"name":"typeCode","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型名称","enum":null,"id":"param256","ignoreFilterName":null,"in":null,"level":1,"name":"typeName","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改人","enum":null,"id":"param257","ignoreFilterName":null,"in":null,"level":1,"name":"updateId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改时间","enum":null,"id":"param258","ignoreFilterName":null,"in":null,"level":1,"name":"updateTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param179","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["类型树返回vo"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param210","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}},{"id":"db62d70f2d3219133e63df7c4820ad63","operationId":"queryTProTypeListByPageUsingGET","deprecated":false,"summary":"搜索类型列表","methodType":"GET","showUrl":"/j3-typeLib/query-TProTypeList","consumes":["application/x-www-form-urlencoded"],"produces":["*/*"],"author":null,"description":"","requestValue":null,"reqParameters":[{"name":"endDate","children":null,"description":"结束日期","in":"query","require":false,"type":"string","schemaValue":null},{"name":"startDate","children":null,"description":"起始日期","in":"query","require":false,"type":"string","schemaValue":null},{"name":"typeCode","children":null,"description":"类型编码","in":"query","require":false,"type":"string","schemaValue":null},{"name":"typeName","children":null,"description":"类型名称","in":"query","require":false,"type":"string","schemaValue":null}],"responseCodes":[{"code":"200","description":"OK","schema":"JsonVO«List«类型树返回vo»»"},{"code":"401","description":"Unauthorized","schema":null},{"code":"403","description":"Forbidden","schema":null},{"code":"404","description":"Not Found","schema":null}],"multipartResponseSchema":false,"multipCodeDatas":[{"code":"200","responseHeaderParameters":null,"data":[{"name":"code","children":null,"description":"状态码","id":"param263","type":"integer(int32)","schemaValue":"integer(int32)"},{"name":"data","children":[{"name":"_loading","children":null,"description":"异步加载","id":"param244","type":"boolean","schemaValue":null},{"name":"children","children":null,"description":"子集","id":"param245","type":"array","schemaValue":"类型树返回vo"},{"name":"createId","children":null,"description":"创建人","id":"param246","type":"string","schemaValue":null},{"name":"createTime","children":null,"description":"创建时间","id":"param247","type":"string(date-time)","schemaValue":null},{"name":"delFlag","children":null,"description":"删除状态(0-未删除，1-已删除)","id":"param248","type":"integer(int32)","schemaValue":null},{"name":"deleteId","children":null,"description":"删除人","id":"param249","type":"string","schemaValue":null},{"name":"deleteTime","children":null,"description":"删除时间","id":"param250","type":"string(date-time)","schemaValue":null},{"name":"id","children":null,"description":"主键id","id":"param251","type":"string","schemaValue":null},{"name":"orderNum","children":null,"description":"排序","id":"param252","type":"integer(int32)","schemaValue":null},{"name":"parentId","children":null,"description":"父节点id","id":"param253","type":"string","schemaValue":null},{"name":"remark","children":null,"description":"备注","id":"param254","type":"string","schemaValue":null},{"name":"typeCode","children":null,"description":"类型编码","id":"param255","type":"string","schemaValue":null},{"name":"typeName","children":null,"description":"类型名称","id":"param256","type":"string","schemaValue":null},{"name":"updateId","children":null,"description":"修改人","id":"param257","type":"string","schemaValue":null},{"name":"updateTime","children":null,"description":"修改时间","id":"param258","type":"string(date-time)","schemaValue":null}],"description":"数据对象","id":"param264","type":"array","schemaValue":"类型树返回vo"},{"name":"message","children":null,"description":"提示消息","id":"param295","type":"string","schemaValue":null}],"responseBasicType":false,"responseText":null,"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"_loading\": true,\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"_loading\": true,\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{}\n\t\t\t\t\t],\n\t\t\t\t\t\"createId\": \"\",\n\t\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\t\"delFlag\": 0,\n\t\t\t\t\t\"deleteId\": \"\",\n\t\t\t\t\t\"deleteTime\": \"\",\n\t\t\t\t\t\"id\": \"\",\n\t\t\t\t\t\"orderNum\": 0,\n\t\t\t\t\t\"parentId\": \"\",\n\t\t\t\t\t\"remark\": \"\",\n\t\t\t\t\t\"typeCode\": \"\",\n\t\t\t\t\t\"typeName\": \"\",\n\t\t\t\t\t\"updateId\": \"\",\n\t\t\t\t\t\"updateTime\": \"\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"createId\": \"\",\n\t\t\t\"createTime\": \"\",\n\t\t\t\"delFlag\": 0,\n\t\t\t\"deleteId\": \"\",\n\t\t\t\"deleteTime\": \"\",\n\t\t\t\"id\": \"\",\n\t\t\t\"orderNum\": 0,\n\t\t\t\"parentId\": \"\",\n\t\t\t\"remark\": \"\",\n\t\t\t\"typeCode\": \"\",\n\t\t\t\"typeName\": \"\",\n\t\t\t\"updateId\": \"\",\n\t\t\t\"updateTime\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}"}],"responseHeaderParameters":null,"multipData":{"oas2":true,"code":"200","description":"OK","schema":"JsonVO«List«类型树返回vo»»","schemaTitle":null,"refTreetableparameters":[],"responseCodes":[],"responseValue":"{\n\t\"code\": 10000,\n\t\"data\": [\n\t\t{\n\t\t\t\"_loading\": true,\n\t\t\t\"children\": [\n\t\t\t\t{\n\t\t\t\t\t\"_loading\": true,\n\t\t\t\t\t\"children\": [\n\t\t\t\t\t\t{}\n\t\t\t\t\t],\n\t\t\t\t\t\"createId\": \"\",\n\t\t\t\t\t\"createTime\": \"\",\n\t\t\t\t\t\"delFlag\": 0,\n\t\t\t\t\t\"deleteId\": \"\",\n\t\t\t\t\t\"deleteTime\": \"\",\n\t\t\t\t\t\"id\": \"\",\n\t\t\t\t\t\"orderNum\": 0,\n\t\t\t\t\t\"parentId\": \"\",\n\t\t\t\t\t\"remark\": \"\",\n\t\t\t\t\t\"typeCode\": \"\",\n\t\t\t\t\t\"typeName\": \"\",\n\t\t\t\t\t\"updateId\": \"\",\n\t\t\t\t\t\"updateTime\": \"\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"createId\": \"\",\n\t\t\t\"createTime\": \"\",\n\t\t\t\"delFlag\": 0,\n\t\t\t\"deleteId\": \"\",\n\t\t\t\"deleteTime\": \"\",\n\t\t\t\"id\": \"\",\n\t\t\t\"orderNum\": 0,\n\t\t\t\"parentId\": \"\",\n\t\t\t\"remark\": \"\",\n\t\t\t\"typeCode\": \"\",\n\t\t\t\"typeName\": \"\",\n\t\t\t\"updateId\": \"\",\n\t\t\t\"updateTime\": \"\"\n\t\t}\n\t],\n\t\"message\": \"提示消息内容\"\n}","responseJson":{"code":10000,"data":[{"_loading":true,"children":[{"_loading":true,"children":[{}],"createId":"","createTime":"","delFlag":0,"deleteId":"","deleteTime":"","id":"","orderNum":0,"parentId":"","remark":"","typeCode":"","typeName":"","updateId":"","updateTime":""}],"createId":"","createTime":"","delFlag":0,"deleteId":"","deleteTime":"","id":"","orderNum":0,"parentId":"","remark":"","typeCode":"","typeName":"","updateId":"","updateTime":""}],"message":"提示消息内容"},"responseText":null,"responseBasicType":false,"responseHeaderParameters":null,"responseParameters":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param263","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param264","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"异步加载","enum":null,"id":"param244","ignoreFilterName":null,"in":null,"level":1,"name":"_loading","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"boolean","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"子集","enum":null,"id":"param245","ignoreFilterName":null,"in":null,"level":1,"name":"children","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":true,"schemaValue":"类型树返回vo","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建人","enum":null,"id":"param246","ignoreFilterName":null,"in":null,"level":1,"name":"createId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建时间","enum":null,"id":"param247","ignoreFilterName":null,"in":null,"level":1,"name":"createTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除状态(0-未删除，1-已删除)","enum":null,"id":"param248","ignoreFilterName":null,"in":null,"level":1,"name":"delFlag","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除人","enum":null,"id":"param249","ignoreFilterName":null,"in":null,"level":1,"name":"deleteId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除时间","enum":null,"id":"param250","ignoreFilterName":null,"in":null,"level":1,"name":"deleteTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"主键id","enum":null,"id":"param251","ignoreFilterName":null,"in":null,"level":1,"name":"id","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序","enum":null,"id":"param252","ignoreFilterName":null,"in":null,"level":1,"name":"orderNum","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"父节点id","enum":null,"id":"param253","ignoreFilterName":null,"in":null,"level":1,"name":"parentId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"备注","enum":null,"id":"param254","ignoreFilterName":null,"in":null,"level":1,"name":"remark","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型编码","enum":null,"id":"param255","ignoreFilterName":null,"in":null,"level":1,"name":"typeCode","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型名称","enum":null,"id":"param256","ignoreFilterName":null,"in":null,"level":1,"name":"typeName","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改人","enum":null,"id":"param257","ignoreFilterName":null,"in":null,"level":1,"name":"updateId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改时间","enum":null,"id":"param258","ignoreFilterName":null,"in":null,"level":1,"name":"updateTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["类型树返回vo"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param295","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}],"responseParameterRefName":"JsonVO«List«类型树返回vo»»","responseRefParameters":[{"name":"类型树返回vo","params":[{"name":"_loading","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"异步加载","txtValue":null,"enum":null,"id":"param265","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"children","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"子集","txtValue":null,"enum":null,"id":"param266","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"createId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建人","txtValue":null,"enum":null,"id":"param267","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param268","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"delFlag","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除状态(0-未删除，1-已删除)","txtValue":null,"enum":null,"id":"param269","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"deleteId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除人","txtValue":null,"enum":null,"id":"param270","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"deleteTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除时间","txtValue":null,"enum":null,"id":"param271","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"id","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"主键id","txtValue":null,"enum":null,"id":"param272","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"orderNum","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序","txtValue":null,"enum":null,"id":"param273","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"parentId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"父节点id","txtValue":null,"enum":null,"id":"param274","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"remark","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"备注","txtValue":null,"enum":null,"id":"param275","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"typeCode","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型编码","txtValue":null,"enum":null,"id":"param276","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"typeName","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型名称","txtValue":null,"enum":null,"id":"param277","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"updateId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改人","txtValue":null,"enum":null,"id":"param278","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改时间","txtValue":null,"enum":null,"id":"param279","pid":"param264","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}],"responseTreetableRefParameters":[{"init":false,"id":"param264","name":"类型树返回vo","params":[{"name":"_loading","ignoreFilterName":null,"require":false,"type":"boolean","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"异步加载","txtValue":null,"enum":null,"id":"param280","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"children","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"子集","txtValue":null,"enum":null,"id":"param281","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"createId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建人","txtValue":null,"enum":null,"id":"param282","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"createTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"创建时间","txtValue":null,"enum":null,"id":"param283","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"delFlag","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除状态(0-未删除，1-已删除)","txtValue":null,"enum":null,"id":"param284","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"deleteId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除人","txtValue":null,"enum":null,"id":"param285","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"deleteTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"删除时间","txtValue":null,"enum":null,"id":"param286","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"id","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"主键id","txtValue":null,"enum":null,"id":"param287","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"orderNum","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"排序","txtValue":null,"enum":null,"id":"param288","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"parentId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"父节点id","txtValue":null,"enum":null,"id":"param289","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"remark","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"备注","txtValue":null,"enum":null,"id":"param290","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"typeCode","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型编码","txtValue":null,"enum":null,"id":"param291","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"typeName","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"类型名称","txtValue":null,"enum":null,"id":"param292","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"updateId","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改人","txtValue":null,"enum":null,"id":"param293","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]},{"name":"updateTime","ignoreFilterName":null,"require":false,"type":"string(date-time)","in":null,"schema":true,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"修改时间","txtValue":null,"enum":null,"id":"param294","pid":"param264","level":1,"show":true,"readOnly":false,"example":"","childrenTypes":[],"children":null,"parentTypes":["类型树返回vo","类型树返回vo"]}],"level":1,"childrenTypes":[]}],"data":[{"name":"code","ignoreFilterName":null,"require":false,"type":"integer(int32)","in":null,"schema":true,"schemaValue":"integer(int32)","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"状态码","txtValue":null,"enum":null,"id":"param263","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":["integer(int32)"]},{"name":"data","ignoreFilterName":null,"require":false,"type":"array","in":null,"schema":true,"schemaValue":"类型树返回vo","value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"数据对象","txtValue":null,"enum":null,"id":"param264","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":[{"children":null,"childrenTypes":[],"def":null,"description":"异步加载","enum":null,"id":"param244","ignoreFilterName":null,"in":null,"level":1,"name":"_loading","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"boolean","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"子集","enum":null,"id":"param245","ignoreFilterName":null,"in":null,"level":1,"name":"children","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":true,"schemaValue":"类型树返回vo","show":true,"txtValue":null,"type":"array","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建人","enum":null,"id":"param246","ignoreFilterName":null,"in":null,"level":1,"name":"createId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"创建时间","enum":null,"id":"param247","ignoreFilterName":null,"in":null,"level":1,"name":"createTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除状态(0-未删除，1-已删除)","enum":null,"id":"param248","ignoreFilterName":null,"in":null,"level":1,"name":"delFlag","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除人","enum":null,"id":"param249","ignoreFilterName":null,"in":null,"level":1,"name":"deleteId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"删除时间","enum":null,"id":"param250","ignoreFilterName":null,"in":null,"level":1,"name":"deleteTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"主键id","enum":null,"id":"param251","ignoreFilterName":null,"in":null,"level":1,"name":"id","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"排序","enum":null,"id":"param252","ignoreFilterName":null,"in":null,"level":1,"name":"orderNum","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"integer(int32)","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"父节点id","enum":null,"id":"param253","ignoreFilterName":null,"in":null,"level":1,"name":"parentId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"备注","enum":null,"id":"param254","ignoreFilterName":null,"in":null,"level":1,"name":"remark","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型编码","enum":null,"id":"param255","ignoreFilterName":null,"in":null,"level":1,"name":"typeCode","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"类型名称","enum":null,"id":"param256","ignoreFilterName":null,"in":null,"level":1,"name":"typeName","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改人","enum":null,"id":"param257","ignoreFilterName":null,"in":null,"level":1,"name":"updateId","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string","validateInstance":null,"validateStatus":false,"value":null},{"children":null,"childrenTypes":[],"def":null,"description":"修改时间","enum":null,"id":"param258","ignoreFilterName":null,"in":null,"level":1,"name":"updateTime","parentTypes":["类型树返回vo","类型树返回vo"],"pid":"param264","require":false,"schema":false,"schemaValue":null,"show":true,"txtValue":null,"type":"string(date-time)","validateInstance":null,"validateStatus":false,"value":null}],"parentTypes":["类型树返回vo"]},{"name":"message","ignoreFilterName":null,"require":false,"type":"string","in":null,"schema":false,"schemaValue":null,"value":null,"validateStatus":false,"validateInstance":null,"def":null,"description":"提示消息","txtValue":null,"enum":null,"id":"param295","pid":"-1","level":1,"show":true,"readOnly":false,"example":null,"childrenTypes":[],"children":null,"parentTypes":[]}]}}],"hasNew":true,"hasChanged":false}]};
+        //console(datas);
+        return datas;
+      }
+
+      function main(){
+        //当前接口json数据
+        var d=getData();
+        //请求参数table-header
+        const requestcolumns = [
+          {
+            title: "参数名称",
+            dataIndex: "name",
+            width: "30%"
+          },
+          {
+            title: "参数说明",
+            dataIndex: "description",
+            width: "25%"
+          },
+          {
+            title: "请求类型",
+            dataIndex: "in",
+            scopedSlots: { customRender: "typeTemplate" }
+          },
+          {
+            title: "是否必须",
+            dataIndex: "require",
+            scopedSlots: { customRender: "requireTemplate" }
+          },
+          {
+            title: "数据类型",
+            dataIndex: "type",
+            scopedSlots: { customRender: "datatypeTemplate" }
+          },
+          {
+            title: "schema",
+            dataIndex: "schemaValue",
+            width: "15%"
+          }
+        ];
+        //响应状态table-header
+        const responseStatuscolumns = [
+          {
+            title: "状态码",
+            dataIndex: "code",
+            width: "20%"
+          },
+          {
+            title: "说明",
+            dataIndex: "description",
+            width: "55%",
+            scopedSlots: { customRender: "descriptionTemplate" }
+          },
+          {
+            title: "schema",
+            dataIndex: "schema"
+          }
+        ];
+        //响应头-header
+        const responseHeaderColumns = [
+          {
+            title: "参数名称",
+            dataIndex: "name",
+            width: "30%"
+          },
+          {
+            title: "参数说明",
+            dataIndex: "description",
+            width: "55%"
+          },
+          {
+            title: "数据类型",
+            dataIndex: "type"
+          }
+        ];
+        const responseParametersColumns = [
+          {
+            title: "参数名称",
+            dataIndex: "name",
+            width: "35%"
+          },
+          {
+            title: "参数说明",
+            dataIndex: "description",
+            width: "40%"
+          },
+          {
+            title: "类型",
+            dataIndex: "type"
+          },
+          {
+            title: "schema",
+            dataIndex: "schemaValue",
+            width: "15%"
+          }
+        ];
+        //dataType组件
+        var dataType={
+          name: "DataType",
+          props: {
+            text: {
+              type: String,
+              required: true
+            },
+            record: {
+              type: Object,
+              required: true
+            }
+          },
+          data:function(){
+            return {
+               validators: []
+            }
+          },
+          created() {
+            this.intiValidator();
+          },
+          methods: {
+            intiValidator() {
+              var that = this;
+              const record = this.record;
+              if (record.validateInstance != null) {
+                var len = that.getJsonKeyLength(record.validateInstance);
+                var _size = 0;
+                for (var k in record.validateInstance) {
+                  var str = k + ":" + record.validateInstance[k];
+                  that.validators.push({ key: k, val: str });
+                }
+              }
+            },
+            getJsonKeyLength(json) {
+              var size = 0;
+              if (json != null) {
+                for (var key in json) {
+                  if (json.hasOwnProperty(key)) size++;
+                }
+              }
+              return size;
+            }
+          },
+          template:'<div><span v-if="!record.validateStatus">{{text}}</span><span v-else class="knife4j-request-validate-jsr"><a-tooltip placement="right"><template slot="title"><div v-for="pt in validators" :key="pt.key">{{pt.val}}</div></template>{{text}}</a-tooltip></span></div>'
+
+        }
+        var data={
+          tags:d.tags,
+          instance:d.instance,
+          columns: requestcolumns,
+          responseHeaderColumns: responseHeaderColumns,
+          responseStatuscolumns: responseStatuscolumns,
+          responseParametersColumns: responseParametersColumns,
+          expanRows: true,
+          //接收一个响应信息对象,遍历得到树形结构的值
+          multipCode: false,
+          multipCodeDatas: [],
+          multipData: {},
+          page: false,
+          hideShow:true
+        }
+        new Vue({
+          el:"#knife4jDocument",
+          components:{
+            "DataType":dataType
+          },
+          data(){
+            return data
+          },
+          mounted(){
+             //初始化完成
+            //赋予点击事件;
+            document.getElementById("btnHide").addEventListener("click",function(){
+              //隐藏目录
+              var doc=document.getElementById("knife4jDoc");
+              var docGlobal=document.getElementById("knife4j-doc-m");
+              if(doc.style.display=="none"){
+                doc.style.display="";
+                document.getElementById("btnHide").innerHTML="隐 藏";
+                docGlobal.style.width="400px";
+                docGlobal.style.height="500px";
+              }else{
+                doc.style.display="none";
+                document.getElementById("btnHide").innerHTML="目 录";
+                docGlobal.style.width="52px";
+                docGlobal.style.height="35px";
+              }
+            })
+          },
+          created(){
+           
+          },
+          methods:{
+            genUnionTableKey() {
+              var key="param"+new Date().getTime().toString() + Math.floor(Math.random() * 1000000).toString();
+              return key;
+            },
+            formaterJson(json) {
+              try {
+                if (typeof json != "string") {
+                  json = JSON.stringify(json, undefined, 2);
+                }
+                json = json
+                  .replace(/&/g, "&")
+                  .replace(/</g, "<")
+                  .replace(/>/g, ">");
+                return json.replace(
+                  /("(\u[a-zA-Z0-9]{4}|\[^u]|[^\"])*"(s*:)?|(true|false|null)|-?d+(?:.d*)?(?:[eE][+-]?d+)?)/g,
+                  function(match) {
+                    var cls = "number";
+                    if (/^"/.test(match)) {
+                      if (/:$/.test(match)) {
+                        cls = "key";
+                      } else {
+                        cls = "string";
+                      }
+                    } else if (/true|false/.test(match)) {
+                      cls = "boolean";
+                    } else if (/null/.test(match)) {
+                      cls = "null";
+                    }
+                    return '<span class="' + cls + '">' + match + "</span>";
+                  }
+                );
+              } catch (error) {
+                return json;
+              }
+            }
+          }
+        })
+
+      }
+
+      main();
+      
+      
+    </script>
+  </body>
+  </html>

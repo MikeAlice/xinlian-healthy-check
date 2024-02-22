@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.sectionoffice.mapper.TSectionOfficeMapper">
+    <resultMap type="com.zeroone.star.sectionoffice.entity.TSectionOffice" id="SectionOfficeMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="sectionCode" column="section_code" jdbcType="VARCHAR"/>
+        <result property="sectionName" column="section_name" jdbcType="VARCHAR"/>
+        <result property="sectionAlphbet" column="section_alphbet" jdbcType="VARCHAR"/>
+        <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
+        <result property="contact" column="contact" jdbcType="VARCHAR"/>
+        <result property="contactMobile" column="contact_mobile" jdbcType="VARCHAR"/>
+        <result property="checkType" column="check_type" jdbcType="VARCHAR"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+        <result property="createId" column="create_id" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateId" column="update_id" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteId" column="delete_id" jdbcType="VARCHAR"/>
+        <result property="deleteTime" column="delete_time" jdbcType="TIMESTAMP"/>
+        <result property="departmentId" column="department_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAll" resultType="com.zeroone.star.project.j4.vo.GetSectionOfficeVO">
+        SELECT section_code,section_name,section_alphbet,order_num,contact,contact_mobile,check_type
+        FROM t_section_office
+        WHERE
+        <!-- 根据实际需要拼接条件 -->
+            <if test="query.sectionCode != null">
+                section_code = #{query.sectionCode}
+            </if>
+            <if test="query.sectionName != null">
+                AND section_name = #{query.sectionName}
+            </if>
+            <if test="query.sectionAlphbet != null">
+                AND section_alphbet = #{query.sectionAlphbet}
+            </if>
+            <if test="query.checkType != null">
+                AND check_type like concat('%' + #{query.checkType} + '%')
+            </if>
+        LIMIT #{page.offset}, #{page.size}
+    </select>
+
+</mapper>

@@ -1,0 +1,5 @@
+server:
+  port: ${sp.department}
+spring:
+  application:
+    name: ${sn.department}

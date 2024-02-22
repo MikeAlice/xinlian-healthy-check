@@ -1,0 +1,5 @@
+server:
+  port: ${sp.menu}
+spring:
+  application:
+    name: ${sn.menu}

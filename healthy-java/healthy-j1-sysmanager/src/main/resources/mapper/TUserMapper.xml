@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.sysmanager.mapper.TUserMapper">
+    <update id="deleteUserByIds">
+        update zo_healthy.t_user
+        set del_flag = 1, update_by = #{UpdateBy}, update_time = #{updateTime}
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+    <update id="updateUser">
+        update zo_healthy.t_user
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="departmentTitle != null">department_title = #{departmentTitle},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="street != null">street = #{street},</if>
+            <if test="autograph != null">autograph = #{autograph},</if>
+            <if test="birth != null">birth = #{birth},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

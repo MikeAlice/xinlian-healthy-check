@@ -1,0 +1,135 @@
+sample:
+ get:
+  summary: 分页查询示例数据
+ post:
+  summary: 新增样本-无人
+ put:
+  summary: 修改样本库中的一条数据--快乐五香蛋
+ delete:
+  summary: 删除一条示例数据
+ query-one:
+  summary: 使用声明式服务查询一条数据
+ query-all:
+  summary: 使用声明式服务查询多条数据
+ query:
+  summary: 获取样本列表-无人
+ field:
+  id: 编号
+  age: 年龄
+  name: 姓名
+  sex: 性别，如：男
+  SampleId: 样本主键 
+  SampleName: 样本名称
+  spec: 规格
+  code: 标本代码
+  is_print: 是否打印
+  capacity: 容量
+  barcode_num: 条码份数
+  need_take_blood: 是否需要采血
+  order_num: 排序
+  liscode: 关联码
+
+positive:
+ resRules:
+  query:
+   summary: 查询阳性结果规则-puck
+  add:
+   summary: 新增阳性结果规则-puck
+  remove:
+   summary: 删除阳性结果规则-puck
+  modify:
+   summary: 修改阳性结果规则-puck
+  field:
+   id: 编号
+   condition: 条件
+   genderAppropriate: 适合性别
+   positiveId: 阳性Id
+   projectName: 规则
+   judgmentCondition: 判断条件
+   excludePositive: 排除阳性结果
+   type: 类型
+ rules:
+  query:
+   summary: 查询阳性规则-puck
+  field:
+   id: 编号
+   projectName: 项目名称
+   type: 类型
+   regularValue: 规则值
+   positiveResultsId: 阳性规则Id
+ remove:
+  summary: 删除阳性结果-elysia
+  field:
+   id: 编号
+ result:
+  summary: 获取阳性结果列表-elysia
+  field:
+   id: 编号
+   condition: 条件
+   genderAppropriate: 适合性别
+   positiveId: 阳性id
+   projectName: 规则
+   judgmentCondition: 判断条件
+   excludePositive: 排除阳性结果
+   type: 类型
+
+deatil:
+ get:
+  summary: 阳性结果详细查询-圈圈
+ field: 
+  id: 编号
+  name: 名称
+  namePinYin: 简拼
+  degree: 严重程度
+  positive: 是否阳性
+  sectionName: 科室名称
+  advise: 职业建议
+  healthKnowledge: 健康建议
+modify:
+ put:
+  summary: 修改阳性结果-圈圈
+ field: 
+  id: 编号
+  type: 阳性结果
+  name: 名称
+  namePinYin: 简拼
+  degree: 严重程度
+  positive: 是否阳性
+  sectionName: 科室名称
+  advise: 职业建议
+  healthKnowledge: 健康建议
+ obsl:
+  type: 查询类型
+  name: 名称
+  code: 样本代码
+  liscode: 关联码
+
+sampleDetails:
+ get:
+  summary: 获取样本详情-睡不着
+ delete:
+  summary: 删除数据
+ field:
+  name: 名称
+  barcode_num: 条码份数
+  spec: 规格
+  need_take_blood: 是否采血
+  code: 样本代码
+  order_num: 排序
+  is_print: 是否打印
+  liscode: 关联码
+  capacity: 容量
+ 
+
+DeleteSample:
+ delete:
+  summary: 删除数据-睡不着
+ field:
+  del_flag: 是否删除
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+  department_id: 所属部门

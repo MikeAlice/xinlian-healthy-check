@@ -1,0 +1,132 @@
+﻿# 营销管理-团检订单
+order:
+ # 订单部分
+ get-list:
+  summary: 获取订单名称列表（条件+分页）
+ get-detail:
+  summary: 获取订单详情
+ get-item:
+  summary: 获取订单体检项目信息
+ get-person:
+  summary: 获取订单体检人员信息
+ post:
+  summary: 新增订单
+ put:
+  summary: 修改订单
+ delete:
+  summary: 删除订单
+ confirm:
+  summary: 订单确认
+ approval:
+  summary: 查看审批信息
+ # 人员部分
+ download-person:
+  summary: 生成人员导入模板
+ import-person:
+  summary: 保存人员导入信息
+ export-person:
+  summary: 导出人员信息
+ # 合同（委托）部分
+ download-entrust:
+  summary: 下载委托合同模板
+ upload-entrust:
+  summary: 保存委托合同附件
+ preview-entrust:
+  summary: 委托合同附件预览
+ field:
+  id: 主键(订单id)
+  order_code: 订单编号
+  group_unit_id: 团检单位id
+  group_unit_name: 团检单位名称
+  physical_type: 团检类型
+  pay_status: 支付状态
+  search_key: 关键字
+  group: 分组
+  start_date: 开始日期
+  end_date: 结束日期
+  sales_director: 销售负责人
+  sales_director_name: 销售负责人姓名
+  signing_time: 签订日期
+  delivery_time: 检查日期
+  sporadic_physical: 是否零星体检(0-否，1-是)
+  audit_state: 审核状态 -1 不审核 0 要审核 1处理中 2已通过 3未通过 
+  # 附加信息
+  del_flag: 是否删除(0-未删除，1-已删除)
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+
+# 项目信息
+item:
+ field:
+  id: 主键(项目id)
+  group_id: 分组id
+  group_order_id: 订单id
+  name: 名称
+  sale_price: 销售价（元）
+  discount: 折扣
+  discount_price: 折扣价(元)
+  project_type: 项目类型（1套餐项目 2非套餐项目）
+  # 附加信息
+  del_flag: 是否删除(0-未删除，1-已删除)
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+
+# 分组信息
+group:
+ field:
+  id: 主键(分组id)
+  group_order_id: 订单id
+  name: 分组名称
+  combo_id: 套餐id
+  discount: 团单折扣
+  add_discount: 增项折扣
+  discount_price: 优惠价
+  person_count: 组人数
+  # 附加信息
+  del_flag: 是否删除(0-未删除，1-已删除)
+  create_id: 创建人
+  create_time: 创建时间
+  update_id: 修改人
+  update_time: 修改时间
+  delete_id: 删除人
+  delete_time: 删除时间
+
+# 人员信息
+person:
+ field:
+  id: 主键(人员id)
+  person_name: 人员姓名
+  sex: 性别
+  id_card: 证件号码
+  age: 年龄
+  group_id: 分组id
+  order_id: 订单id
+  physical_type: 体检类型
+  mobile: 手机号码
+  group_name: 分组名称
+  hazard_factors_text: 危害因素名称
+  other_hazard_factors: 其他危害因素名称
+  work_type_text: 工种名称
+  work_name: 其他工种名称
+  work_state_text: 在岗状态
+  department: 所属部门
+  is_pass: 是否通过检查(0-未登记, 1-登记, 2-在检, 3-总检, 4-已完成)
+
+# 审批信息
+flow:
+ field:
+  id: 主键(审批id)
+  audit_state: 审核状态 2通过 3未通过  0默认
+  audit_user_id: 审核人员id
+  audit_user_name: 审核人员
+  audit_time: 审核时间
+  audit_content: 审核意见
+  group_order_id: 订单id

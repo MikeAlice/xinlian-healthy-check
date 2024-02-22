@@ -1,0 +1,20 @@
+t: 我是中文标题title
+f: 456
+
+
+
+
+
+
+title: 个人信息
+name: 姓名 
+sex: 性别
+age: 年龄
+idCard: 身份证号 
+mobile: 联系电话
+physicalType: 体检种类
+dept: 工作单位
+conclusion: 健康检查结论及处理意见
+inspectionDoctor: 主检医生
+inspectionDate: 体检日期
+diagnosticUnit: 检查单位

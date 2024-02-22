@@ -1,0 +1,33 @@
+report:
+ field:
+  id: 唯一编号
+  type: 体检类型
+  name: 姓名
+  orderId: 订单编号
+  testNum: 体检编号
+  unitid: 单位名称
+  statu: 是否过审
+  isRecheck: 是否复查
+  starDate: 开始日期
+  endDate: 结束日期
+  sex: 性别
+  age: 年龄
+  printState: 是否打印
+ get:
+  summary: 获取列表
+preview:
+ field:
+  id: 唯一编号
+  idcard: 身份证号
+  mobile: 联系电话
+  dept: 工作单位
+  inspectiondate: 总检日期
+  conclusion: 健康检查结论
+  handleopinion: 处理意见
+  inspection_doctor: 主检医生
+  diagnostic_unit:  体检单位
+  pdfaddress: pdf下载地址
+  persionid: 人员编号
+  persion: 个人信息
+ get:
+  summary: 获取wordpdf

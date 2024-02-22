@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeroone.star.sysmanager.mapper.UserRoleMapper">
+    <insert id="insert">
+        insert into zo_healthy.t_user_role
+            (create_by, create_time, del_flag, update_by, update_time, role_id, user_id) values
+        <foreach collection="list" separator="," item="l">
+            (#{l.createBy},#{l.createTime},#{l.delFlag},#{l.updateBy},#{l.updateTime},#{l.roleId},#{l.userId})
+        </foreach>
+    </insert>
+</mapper>

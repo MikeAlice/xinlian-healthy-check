@@ -1,0 +1,5 @@
+server:
+  port: ${sp.role}
+spring:
+  application:
+    name: ${sn.role}

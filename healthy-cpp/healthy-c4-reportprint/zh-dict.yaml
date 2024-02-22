@@ -1,0 +1,59 @@
+preview:
+ field:
+  personId: 体检人员编号
+  id: 编号
+  reportNum: 报告编号
+  href: 文件地址
+  presonId: 姓名ID
+  report-url: 报告src
+  report-alt: 报告文字描述
+ get:
+  view: 报告预览 
+print:
+ field:
+  type: 体检类型
+  id: 编号
+  name: 姓名
+  age: 年龄
+  sex: 性别
+  statu: 审核
+  printState: 打印状态
+  orderId: 订单编号
+  testNum: 体检编号
+  dept: 单位名称
+  startDate: 开始日期
+  endDate: 结束日期
+  isRecheck: 复查
+  sporadicPhysical: 零星检查
+  targetPrinter: 目标打印机
+  page: 页面
+  pageNumPerTable: 每个工作表的页数
+  printSampleCode: 打印样本条码
+ get:
+  summary: 获取体检人员报告
+  download: 报告下载
+  print: 报告打印
+  sampleCode: 获取样本条码
+addition:
+ field:
+  reportName: 报告名称
+  printNum: 报告打印次数
+  sampleCodeNum: 条码数字
+  sampleCodeName: 条码名称
+ test:
+  testReportName: 职业健康体检报告
+  sampleCodeName: 职业健康体检条码
+pdf:
+ title: 个人信息
+ name: 姓名 
+ sex: 性别
+ age: 年龄
+ idCard: 身份证号 
+ mobile: 联系电话
+ physicalType: 体检种类
+ dept: 工作单位
+ conclusion: 健康检查结论
+ handleOpinion: 处理意见
+ inspectionDoctor: 主检医生
+ inspectionDate: 体检日期
+ diagnosticUnit: 检查单位
